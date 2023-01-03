@@ -1,0 +1,31 @@
+<%= render partial: "aypex/checkout/orders/components/#{@order.state}" %>
+
+<% if content_for :express_checkout_options %>
+  <% if aypex_checkout_express_checkout_payment_methods.any? %>
+    <div id=express-checkouts>
+      <div class=notation-bar><%= I18n.t('aypex_checkout.express_checkout') %></div>
+      <%= yield :express_checkout_options %>
+      <div class=notation-bar>or</div>
+    </div>
+  <% end %>
+<% end %>
+
+<%= yield :attained_order_info %>
+
+<%= form_with model: @order, url: aypex.checkout_path(@order.state), method: :patch do |form| %>
+  <div class=row>
+    <div class=col-12 data-hook=checkout_form_wrapper>
+      <%= render @order.state, form: form %>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-6">
+      <%= yield :back_button %>
+    </div>
+
+    <div class="col-6">
+      <%= yield :proceed_button %>
+    </div>
+  </div>
+<% end %>

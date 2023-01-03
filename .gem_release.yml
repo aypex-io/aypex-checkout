@@ -1,0 +1,6 @@
+bump:
+  recurse: false
+  file: 'checkout/lib/aypex/checkout/version.rb'
+
+release:
+  recurse: true

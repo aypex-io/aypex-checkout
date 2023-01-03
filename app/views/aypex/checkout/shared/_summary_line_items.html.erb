@@ -1,0 +1,32 @@
+<% @order.line_items.each do |item| %>
+  <div class=checkout-product-image>
+    <% variant = item.variant %>
+    <span class="product-thumbnail-quantity" aria-hidden="true"><%= item.quantity %></span>
+
+    <%= aypex_checkout_product_image_tag(variant) %>
+  </div>
+
+  <div class="d-flex align-items-center">
+    <div>
+      <strong>
+        <%= item.name %>
+      </strong>
+      <br>
+      <small class="text-muted">
+         <%= item.quantity %> x <%= item.single_money %>
+      </small>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center" data-hook="order_item_total">
+    <div class="text-end w-100">
+      <% if item.final_amount < item.amount %>
+        <span class="text-muted text-decoration-line-through"><%= item.display_amount %></span>
+        <br>
+        <span><%= item.display_final_amount %></span>
+      <% else %>
+        <%= item.display_final_amount %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

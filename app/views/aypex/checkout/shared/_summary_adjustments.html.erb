@@ -1,0 +1,84 @@
+<%# SUBTOTAL %>
+<div id="subtotal" class="d-flex my-1" data-hook="order_summary">
+  <div class="text-left flex-fill">
+    <%= I18n.t('aypex_checkout.subtotal') %>
+  </div>
+  <div data-hook="order_item_total" class="text-end">
+    <%= order.display_item_total %>
+  </div>
+</div>
+
+<%# PROMOTIONS %>
+<% if @order.line_item_adjustments.nonzero.promotion.exists? %>
+  <div class="d-flex my-1">
+    <div class="flex-fill">
+      <%= I18n.t('aypex_checkout.discount') %>
+    </div>
+
+    <div class="text-end">
+      <%= @order.display_adjustment_total %>
+    </div>
+  </div>
+<% end %>
+
+
+<%# SHIPPING %>
+<% if order.shipments.any? %>
+  <div class="d-flex my-1" data-hook="order_summary">
+    <% if order.shipment_adjustments.promotion.exists? %>
+      <% shipping_total = I18n.t('aypex_checkout.free') %>
+    <% else %>
+      <% shipping_total = Aypex::Money.new(order.shipments.to_a.sum(&:cost), currency: order.currency) %>
+    <% end %>
+
+    <div class="flex-fill">
+      <%= Aypex.t(:shipping) %>
+    </div>
+
+    <div class="text-end">
+      <%= shipping_total %>
+    </div>
+  </div>
+<% end %>
+
+<%# TAX %>
+<% if order.line_item_adjustments.nonzero.tax.exists? %>
+  <div class="d-flex my-1" data-hook="order_summary">
+    <% order.all_adjustments.nonzero.tax.eligible.each do |added_tax| %>
+    <% next if (added_tax.source_type == 'Aypex::PromotionAction') || (added_tax.amount == 0) || (added_tax.included) %>
+
+      <div class="flex-fill">
+        <%= added_tax.label %>
+      </div>
+      <div class="text-end"><%= added_tax.display_amount %></div>
+    <% end %>
+  </div>
+<% end %>
+
+<hr>
+
+<%# TOTAL %>
+<div id="order-total-line" class="d-flex">
+  <div class="flex-fill">
+    <span class="fs-4"><%= Aypex.t(:total) %></span>
+    <% if order.all_adjustments.nonzero.tax.exists? && @order.state == 'payment' %>
+      <% order.line_item_adjustments.nonzero.eligible.each do |included_tax| %>
+        <% next if (included_tax.source_type == 'Aypex::PromotionAction') || (included_tax.amount == 0) || (!included_tax.included) %>
+
+        <span class="total-tax" data-hook="order_details_tax_adjustments">
+          <%= Aypex.t(:including) %> <%= included_tax.display_amount  %> <%= Aypex.t(:in_taxes) %>
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div id="total" class="text-end">
+    <span class=text-muted>
+      <%= current_currency %>
+    </span>
+
+    <span class="fs-4 ms-2" id='summary-order-total' data-currency="<%= Money::Currency.find(order.currency).symbol %>">
+      <%= order.display_total.to_html %>
+    </span>
+  </div>
+</div>

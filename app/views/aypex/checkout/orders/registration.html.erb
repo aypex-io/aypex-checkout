@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-12">
+    <%= render partial: 'aypex/checkout/shared/login' if defined?(aypex_login_path) %>
+  </div>
+
+  <div class="col-12">
+    <% if Aypex::Config[:allow_guest_checkout] %>
+
+      <div class=my-3>
+        <div class=notation-bar><h5>or</h5></div>
+      </div>
+
+      <%= form_for @order, method: :put, url: aypex.checkout_update_registration_path do |f| %>
+        <div class=d-flex>
+          <div class=flex-fill>
+            <div class="mb-3 form-floating">
+              <%= f.email_field :email, class: 'form-control', placeholder: Aypex.t(:email), value: params.dig(:aypex_user, :email) %>
+              <%= f.label :email, Aypex.t(:email) %>
+            </div>
+          </div>
+          <div class=ms-3>
+            <%= f.submit Aypex.t(:continue_as_guest), class: 'btn btn-block btn-outline-primary aypex-btn' %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+

@@ -1,0 +1,40 @@
+/* stylelint-disable selector-class-pattern */
+/* stylelint-disable keyframes-name-pattern */
+
+body#checkout-page {
+  a {
+    text-decoration: var(--aypex-checkout-link-text-declaration);
+  }
+
+  a.btn {
+    svg {
+      vertical-align: text-bottom;
+    }
+  }
+
+  .min-h-50px {
+    min-height: 50px;
+  }
+}
+
+.top-20px {
+  top: 20px;
+}
+
+@keyframes fadeOutDownAlert {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(0, 500px, 0);
+  }
+}
+
+.animate__fadeInUp.hide {
+  animation-name: fadeOutDownAlert;
+  display: block !important;
+  bottom: 0;
+  margin-bottom: 0 !important;
+}

@@ -1,0 +1,74 @@
+#checkout-steps {
+  span {
+    position: relative;
+    margin-right: 20px;
+    font-size: 90%;
+
+    &::after {
+      content:'';
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-chevron-right' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");      background-repeat: no-repeat;
+      background-size: 14px 14px;
+      display: inline-block;
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      top: 3px;
+      right: -18px;
+    }
+
+    a {
+      text-decoration: var(--aypex-checkout-link-text-declaration);
+    }
+  }
+
+  span:last-child::after {
+    display: none;
+  }
+}
+
+.notation-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  &::before {
+    margin-right: 1.4rem;
+  }
+
+  &::after {
+    margin-left: 1.4rem;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    display: flex;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--aypex-checkout-border-color);
+    border-bottom: 0;
+    height: 1px;
+    flex: 1 0 2.6rem;
+  }
+}
+
+
+div.checkout-so-far {
+  display: grid;
+  grid-template-columns: max-content minmax(0, auto) max-content;
+  align-items: center;
+
+  span.fw {
+    grid-column: 1/4;
+  }
+
+  ul.list-group {
+    margin-bottom: 0;
+
+    li {
+      padding: 10px;
+    }
+  }
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+  <head data-hook="inside_head">
+    <%= render partial: 'aypex/checkout/shared/head' %>
+  </head>
+
+  <body id=checkout-page>
+    <div id=checkout-container>
+      <header>
+        <div class=container>
+          <div class=row>
+            <div class=col-12>
+              <%= render partial: 'aypex/checkout/shared/header' %>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <aside>
+        <div class="container position-sticky top-20px">
+          <div class=row>
+            <div class=col-12>
+              <div id="checkout-summary" class="py-0 my-2" data-hook="checkout_summary_box" style="top: 80px;">
+                <%= render partial: 'aypex/checkout/shared/summary', locals: { order: @order } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main>
+        <div class=container>
+          <div class=row>
+            <div class=col-12>
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <div class="container mb-3">
+          <div class=row>
+            <div class=col-12>
+              <%= render 'aypex/checkout/shared/footer' %>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <div aria-live="polite" aria-atomic="true" class="position-relative">
+      <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x">
+        <%= turbo_frame_tag :toast %>
+        <%= aypex_checkout_flash_messages %>
+      </div>
+    </div>
+
+    <%= turbo_frame_tag :modal %>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+inherit_mode:
+  merge:
+    - Exclude
+
+require:
+  - rubocop-performance
+  - standard
+
+inherit_gem:
+  standard: config/base.yml
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - '**/sandbox/**/*'
+    - '**/db/migrate/*'
+    - '**/Gemfile.lock'
+    - '**/rails'
+    - '**/dummy/**/*'
+    - '**/vendor/**/*'
+    - '**/templates/**/*'

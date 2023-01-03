@@ -1,0 +1,16 @@
+<% content_for :modal_header do %>
+  <h5 class="modal-title"><%= I18n.t('aypex_checkout.addresses') %></h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<% end %>
+
+<% content_for :modal_body do %>
+  <div class="container">
+    HELLO
+  </div>
+<% end %>
+
+<% content_for :modal_footer do %>
+  <%#= remote_form_submit_button(@object) %>
+<% end %>
+
+<%= render partial: 'aypex/checkout/shared/modal', locals: { modal_dialog_settings: 'modal-dialog-scrollable modal-dialog modal-dialog-centered modal-lg' } %>

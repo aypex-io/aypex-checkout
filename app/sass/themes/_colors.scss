@@ -1,0 +1,44 @@
+:root {
+  body {
+    .btn {
+      --bs-btn-padding-y: 1rem;
+    }
+
+    .btn-sm {
+      --bs-btn-padding-y: 0.5rem;
+    }
+
+    .bg-dark{
+      --bs-bg-opacity: 0.65;
+    }
+
+    --aypex-checkout-aside-bg: #fafafa;
+    --aypex-checkout-border-color: #d7dcde;
+    --aypex-checkout-border-radius: 5px;
+    --aypex-checkout-link-color: #717171;
+    --aypex-checkout-link-active-color: rgb(85 129 161);
+    --aypex-checkout-link-color-hover: #d7dcde;
+    --aypex-checkout-link-text-declaration: none;
+  }
+}
+
+aside {
+  background-color: var(--aypex-checkout-aside-bg);
+}
+
+@include media-breakpoint-up(lg) {
+  div#checkout-container {
+   &::before {
+     background-color: var(--bs-body-bg);
+   }
+
+   &::after {
+     border-left: 1px solid  var(--aypex-checkout-border-color);
+     background-color: var(--aypex-checkout-aside-bg);
+   }
+  }
+}
+
+.form-floating>label {
+  opacity:0.45;
+}

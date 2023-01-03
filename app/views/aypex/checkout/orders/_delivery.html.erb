@@ -1,0 +1,35 @@
+<div id="shipping-methods" data-hook="shipping_method_inner" data-controller='form--validation'>
+  <div class="shipment">
+    <h5 class="mb-1">
+      <%= I18n.t('aypex_checkout.shipping_method') %>
+    </h5>
+
+    <%= form.fields_for :shipments do |ship_form| %>
+      <ul class="accordion list-group">
+        <% ship_form.object.shipping_rates.each do |rate| %>
+          <li class="accordion-item list-group-item ps-5 py-0">
+            <%= ship_form.radio_button :selected_shipping_rate_id, rate.id, data: { action: 'form--validation#validate' } %>
+
+            <%= ship_form.label :selected_shipping_rate_id, value: rate.id, class: 'd-flex align-items-center p-0 min-h-50px' do %>
+              <div class="flex-fill">
+                <%= rate.name %>
+              </div>
+              <div>
+                <strong class="rate-cost"><%= rate.display_cost %></strong>
+              </div>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+
+      <%= button_tag :update_shipping_method, formaction: aypex.checkout_update_shipping_choice_path, formmethod: :patch, formnovalidate: true, style: 'display: none;', data: { turbo_frame: :_top, form__validation_target: "submitBtn" } %>
+    <% end %>
+  </div>
+
+  <% if current_store.checkout_shipping_instructions %>
+    <div class="mt-4">
+      <h5><%= I18n.t('aypex_checkout.shipping_instructions') %></h5>
+      <%= form.text_area :special_instructions, placeholder: I18n.t('aypex_checkout.add_shipping_instructions'), cols: 40, rows: 4, class: "form-control" %>
+    </div>
+  <% end %>
+</div>

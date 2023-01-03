@@ -1,0 +1,69 @@
+<div class="d-flex d-lg-none align-items-center">
+  <div class=flex-fill>
+    <button class="btn btn-link btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      <%= Aypex.t(:order_summary) %>
+    </button>
+  </div>
+
+  <div>
+    <strong>
+      <span>
+        <%= @order.display_total.to_html %>
+      </span>
+    </strong>
+  </div>
+</div>
+
+<div class="collapse" id="collapseExample">
+  <div class="checkout-summary-container">
+    <div id="checkout-summary-inner" class="pt-3 pt-lg-0">
+
+      <div id="cart-line-items">
+        <%= render partial: 'aypex/checkout/shared/summary_line_items' %>
+      </div>
+
+      <% if current_store.checkout_coupon_codes_enabled %>
+        <hr>
+
+        <%= form_with model: @order, url: aypex.checkout_apply_coupon_path, data: { controller: 'form--state' } do |form| %>
+          <div class="d-flex" id="discount-apply">
+            <div class="flex-fill">
+              <div class="form-floating">
+                <%= form.text_field :coupon_code, placeholder: I18n.t('aypex_checkout.discount_code'), class: 'form-control text-uppercase', data: { form__state_target: 'watch' } %>
+                <%= form.label :coupon_code, I18n.t('aypex_checkout.discount_code') %>
+              </div>
+            </div>
+
+            <div>
+              <%= button_tag I18n.t('aypex_checkout.apply'), class: 'btn btn-secondary ms-2', data: {form__state_target: 'saveButton'} %>
+            </div>
+          </div>
+        <% end %>
+
+        <% @order.valid_coupon_promotions.each do |promo| %>
+          <%= next if promo.code == nil %>
+
+          <span class="badge bg-dark mt-2 d-inline-flex flex-column">
+            <div>
+              <%= aypex_checkout_svg_tag('tag.svg', class: 'me-1') %>
+
+              <%= promo.code %>
+                <%= link_to aypex.checkout_remove_coupon_path(code: promo.code), data: { turbo_method: :patch }, class: 'text-reset' do %>
+                <%= aypex_checkout_svg_tag('close.svg', class: 'ms-2') %>
+              <% end %>
+            </div>
+            <div>
+              <small class="fw-light"><%= promo.name %></small>
+            </div>
+          </span>
+        <% end %>
+
+        <hr>
+      <% end %>
+
+      <div class="summary_adjustments">
+        <%= render partial: "aypex/checkout/shared/summary_adjustments", locals: { order: order }  %>
+      </div>
+    </div>
+  </div>
+</div>

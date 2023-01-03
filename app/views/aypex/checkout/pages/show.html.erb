@@ -1,0 +1,15 @@
+<% content_for :modal_header do %>
+  <h5 class="modal-title"><%= @page.title %></h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<% end %>
+
+<% content_for :modal_body do %>
+  <div class="container">
+    <div class="col-12">
+      <%= @page.content.html_safe %>
+    </div>
+  </div>
+<% end %>
+
+<%= render partial: 'aypex/checkout/shared/modal', locals: { modal_dialog_settings: 'modal-dialog-scrollable modal-dialog modal-dialog-centered modal-lg' } %>
+

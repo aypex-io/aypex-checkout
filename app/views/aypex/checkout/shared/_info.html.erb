@@ -1,0 +1,79 @@
+<div class="checkout-so-far px-3 mb-5 border rounded">
+  <% if @order.state == 'delivery' %>
+    <div class="text-muted p-2">
+      <%= Aypex.t(:contact) %>:
+    </div>
+
+    <div class="p-2">
+      <%= @order.email%>
+    </div>
+
+    <div class="text-end p-2">
+      <small><%= link_to I18n.t('aypex_checkout.change'), aypex.checkout_state_path('address') %></small>
+    </div>
+
+    <span class="fw border-top"></span>
+
+    <div class="text-muted p-2 fs-6">
+      <%= I18n.t('aypex_checkout.ship_to') %>:
+    </div>
+
+    <div class="text-truncate p-2">
+      <%= @order.shipping_address.address1 %>,
+      <%= @order.shipping_address.city %>,
+      <%= @order.shipping_address.zipcode %>,
+      <%= @order.shipping_address.country %>
+    </div>
+
+    <div class="text-end p-2">
+      <small><%= link_to I18n.t('aypex_checkout.change'), aypex.checkout_state_path('address') %></small>
+    </div>
+  <% end %>
+
+  <% if @order.state == 'payment' %>
+    <div class="text-muted p-2">
+      <%= Aypex.t(:contact) %>:
+    </div>
+
+    <div class="p-2">
+      <%= @order.email%>
+    </div>
+
+    <div class="text-end p-2">
+      <small><%= link_to I18n.t('aypex_checkout.change'), aypex.checkout_state_path('address') %></small>
+    </div>
+
+  <span class="fw border-top"></span>
+
+    <div class="text-muted p-2 fs-6">
+      <%= I18n.t('aypex_checkout.ship_to') %>:
+    </div>
+
+    <div class="text-truncate p-2">
+      <%= @order.shipping_address.address1 %>,
+      <%= @order.shipping_address.city %>,
+      <%= @order.shipping_address.zipcode %>,
+      <%= @order.shipping_address.country %>
+    </div>
+
+    <div class="text-end p-2">
+      <small><%= link_to I18n.t('aypex_checkout.change'), aypex.checkout_state_path('address') %></small>
+    </div>
+
+  <span class="fw border-top"></span>
+
+    <div class="text-muted p-2">
+      <%= Aypex.t(:method) %>:
+    </div>
+
+    <div class="p-2">
+      <% @order.shipments.each do |shipment| %>
+      <%= shipment.shipping_method.name %>
+      <% end %>
+    </div>
+
+    <div class="text-end p-2">
+      <small><%= link_to I18n.t('aypex_checkout.change'), aypex.checkout_state_path('delivery') %></small>
+    </div>
+  <% end %>
+</div>

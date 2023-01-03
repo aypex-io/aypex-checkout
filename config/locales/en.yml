@@ -1,0 +1,58 @@
+---
+en:
+  aypex_checkout:
+    add_shipping_instructions: Add shipping instructions...
+    addresses: Addresses
+    already_have_an_account: Already have an account?
+    alternative_phone: Alternative phone
+    apply: Apply
+    bill_to: Bill to
+    billing_address: Billing address
+    card_number: Card number
+    card_varifiction_code: Security code
+    cardholders_name: Cardholders name
+    change: change
+    city: City
+    company: Csompany
+    contact_information: Contact information
+    continue_to_complete: Complete order
+    continue_to_confirm: Confirm order
+    continue_to_delivery: Continue to shipping
+    continue_to_payment: Continue to payment
+    country: Country
+    discount: Discount
+    discount_code: Discount code
+    email: Email
+    emirate: Emirate
+    expire_date_format: Expiration date (MM/YY)
+    express_checkout: Express checkout
+    first_name: First name
+    forgot_password: Forgot password
+    free: FREE
+    last_name: Last name
+    no_payment_method_options_provided_contact_the_store_owner: No payment options are provided, pleasecontact the store owner.
+    password: Password
+    payment_method: Payment method
+    phone: Phone
+    post_code: Postcode
+    remember_me: Remember me
+    return_to_address: Return to address
+    return_to_cart: Return to cart
+    return_to_delivery: Return to shipping
+    secure_checkout: Secure Checkout
+    ship_to: Ship to
+    shipping_instructions: Ship instructions
+    shipping_method: Shipping method
+    sign_in: Sign in
+    sign_in_to_continue: Sign in to continue
+    sign_out: Sign out
+    sign_up: Sign up
+    state: State
+    state_territory: State/Territory
+    street_address: Street address
+    street_address_2: Address continued
+    subtotal: Subtotal
+    successfully_created: Successfully created
+    successfully_removed: Successfully removed
+    successfully_updated: Successfully updated
+    zipcode: Zipcode

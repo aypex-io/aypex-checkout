@@ -1,0 +1,81 @@
+<div class="payment-gateway-fields bg-light border-top p-3" data-controller="input--card-validation">
+  <% param_prefix = "payment_source[#{payment_method.id}]" %>
+  <% options_hash = Rails.env.production? ? { autocomplete: 'off' } : {} %>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="form-floating mb-3">
+        <%= text_field_tag "#{param_prefix}[name]", "#{@order.bill_address_firstname} #{@order.bill_address_lastname}",
+                                                    { id: "name_on_card",
+                                                      class: 'form-control',
+                                                      placeholder: I18n.t('aypex_checkout.cardholders_name'),
+                                                      disabled: true,
+                                                      data: {controller: 'input--disable-enable'}
+                                                    } %>
+
+        <%= label_tag "#{param_prefix}[name]", I18n.t('aypex_checkout.cardholders_name') %>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="form-floating mb-3">
+        <%= text_field_tag "#{param_prefix}[number]", '',
+                            options_hash.merge(
+                              id: 'card_number',
+                              class: 'form-control',
+                              size: 19,
+                              maxlength: 19,
+                              autocomplete: "off",
+                              placeholder: I18n.t('aypex_checkout.card_number'),
+                              disabled: true,
+                              data: { controller: 'input--disable-enable', input__card_validation_target: 'number'}
+                            ) %>
+
+        <%= label_tag "#{param_prefix}[number]", I18n.t('aypex_checkout.card_number') %>
+      </div>
+
+      <span id="card_type" style="display:none;">
+          ( <span id="looks_like"><%= Aypex.t(:card_type_is) %> <span id="type"></span></span>
+            <span id="unrecognized"><%= Aypex.t(:unrecognized_card_type) %></span>
+          )
+        </span><span id="card_type" style="display:none;">
+          ( <span id="looks_like"><%= Aypex.t(:card_type_is) %> <span id="type"></span></span>
+            <span id="unrecognized"><%= Aypex.t(:unrecognized_card_type) %></span>
+          )
+      </span>
+    </div>
+
+    <div class="col-6">
+      <div class="form-floating mb-3">
+        <%= text_field_tag "#{param_prefix}[expiry]", '',
+                                                  id: 'card_expiry',
+                                                  class: 'form-control',
+                                                  placeholder: I18n.t('aypex_checkout.expire_date_format'),
+                                                  disabled: true,
+                                                  data: { controller: 'input--disable-enable', input__card_validation_target: 'exp' } %>
+        <%= label_tag "#{param_prefix}[expiry]", I18n.t('aypex_checkout.expire_date_format') %>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="form-floating mb-3">
+        <%= text_field_tag "#{param_prefix}[verification_value]", '',
+                            options_hash.merge(
+                              id: 'card_code',
+                              class: 'form-control',
+                              placeholder: I18n.t('aypex_checkout.card_varifiction_code'),
+                              disabled: true,
+                              data: { controller: 'input--disable-enable', input__card_validation_target: 'code' }
+                            ) %>
+
+        <%= label_tag "#{param_prefix}[verification_value]", I18n.t('aypex_checkout.card_varifiction_code') %>
+      </div>
+    </div>
+    <%= hidden_field_tag "#{param_prefix}[cc_type]", '',
+                                                    id: "cc_type",
+                                                    class: 'ccType',
+                                                    disabled: true,
+                                                    data: { controller: 'input--disable-enable', input__card_validation_target: 'type' } %>
+  </div>
+</div>
+

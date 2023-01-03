@@ -1,0 +1,6 @@
+<div class="checkout-confirm" id="order_details" data-hook>
+  <p class="checkout-content-header">
+    <%= Aypex.t(:summary).upcase %>
+  </p>
+  <%= render partial: 'aypex/shared/order_details', locals: { order: @order } %>
+</div>

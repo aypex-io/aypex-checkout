@@ -1,0 +1,17 @@
+<hr>
+
+<div class="w-100 text-center">
+  <small class="text-muted">
+    This is the copyright for the checkout ... more info and something else
+  </small>
+</div>
+
+<div class="w-100 text-center">
+  <small class="text-muted">
+    <% if aypex_checkout_menu.present? %>
+      <% aypex_checkout_menu.children.each_with_index do |item, index| %>
+        <%= aypex_checkout_aypex_nav_link_tag(item, data: {turbo_frame: :modal}) %> <%= "<span class='mx-1'>|</span> ".html_safe unless item == aypex_checkout_menu.children.last %>
+      <% end %>
+    <% end %>
+  </small>
+</div>

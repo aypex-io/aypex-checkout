@@ -1,0 +1,9 @@
+---
+extends: standard
+
+globals:
+  AypexCheckout: true
+  Aypex: true
+
+env:
+  browser: true

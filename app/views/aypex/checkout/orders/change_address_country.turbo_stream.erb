@@ -1,0 +1,3 @@
+<%= turbo_stream.update "#{address_kind}__city-state-zipcode" do %>
+  <%= render partial: "aypex/checkout/addresses/city_state_zip", locals: { address_kind: address_kind } %>
+<% end %>

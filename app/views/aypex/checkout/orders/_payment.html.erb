@@ -1,0 +1,32 @@
+<div id="payment-methods-container">
+  <%= render partial: 'aypex/checkout/payment/storecredit' %>
+
+  <h5 class="mb-1">
+    <%= I18n.t('aypex_checkout.payment_method') %>
+  </h5>
+
+  <% if aypex_checkout_available_payment_methods.any? %>
+    <ul id=payment-methods class="accordion list-group">
+      <% aypex_checkout_available_payment_methods.each_with_index do |payment_method, index| %>
+        <% is_active_method = (payment_method.id == @order.payments.checkout.last&.payment_method_id || payment_method == aypex_checkout_available_payment_methods.first) %>
+
+        <li class="accordion-item list-group-item p-0 m-0">
+          <%= radio_button_tag "order[payments_attributes][][payment_method_id]", payment_method.id, is_active_method %>
+          <%= label_tag "order[payments_attributes][][payment_method_id][#{payment_method.id}]", class: 'd-flex align-items-center ps-5 p-0 min-h-50px', aria: {expanded: index == 0 } ,data: { bs_toggle: 'collapse', bs_target: "#payment-method-container-#{payment_method.id}" }  do %>
+            <div class="flex-fill">
+              <%= payment_method.name %>
+            </div>
+          <% end %>
+
+          <div id="payment-method-container-<%= payment_method.id %>" class="accordion-collapse collapse <%= aypex_checkout_accordion_show_hide(index) %>" data-bs-parent="#payment-methods">
+            <%= render partial: "aypex/checkout/payment/#{payment_method.method_type}", locals: { payment_method: payment_method } %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <div class="alert alert-info">
+      <%= I18n.t('aypex_checkout.no_payment_method_options_provided_contact_the_store_owner') %>
+    </div>
+  <% end %>
+</div>
