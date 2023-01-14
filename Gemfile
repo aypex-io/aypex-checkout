@@ -25,7 +25,7 @@ group :test, :development do
   gem "propshaft"
 end
 
-gem "aypex", path: "../aypex"
+gem "aypex", github: "aypex-io/aypex"
 gem "aypex-api", github: "aypex-io/aypex-api"
 
 gemspec
