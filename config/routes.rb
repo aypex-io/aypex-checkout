@@ -1,4 +1,4 @@
-Aypex::Core::Engine.add_routes do
+Aypex::Engine.add_routes do
   scope "(:locale)", locale: /#{Aypex.available_locales.join('|')}/, defaults: {locale: nil} do
     namespace :checkout do
       namespace :users do

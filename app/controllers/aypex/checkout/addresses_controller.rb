@@ -49,11 +49,11 @@ module Aypex
       end
 
       def create_service
-        Aypex::Dependencies.address_create_service.constantize
+        Aypex::Dependency.address_create_service.constantize
       end
 
       def update_service
-        Aypex::Dependencies.address_update_service.constantize
+        Aypex::Dependency.address_update_service.constantize
       end
     end
   end

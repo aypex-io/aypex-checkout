@@ -169,7 +169,7 @@ describe Aypex::Checkout::OrdersController, type: :controller do
           it "does not change default address" do
             update
 
-            expect(default_bill_address.reload.city).to eq "Herndon"
+            expect(default_bill_address.reload.city).to eq "Leeds"
           end
         end
 
@@ -257,8 +257,8 @@ describe Aypex::Checkout::OrdersController, type: :controller do
               let(:ship_address_params) { build(:address, city: "Washington", state: state).attributes.merge(id: default_ship_address.id).except(:user_id, :created_at, :updated_at) }
 
               it "updates current addresses" do
-                expect(default_bill_address.city).to eq "Herndon"
-                expect(default_ship_address.city).to eq "Herndon"
+                expect(default_bill_address.city).to eq "Leeds"
+                expect(default_ship_address.city).to eq "Leeds"
 
                 update
 
@@ -453,7 +453,7 @@ describe Aypex::Checkout::OrdersController, type: :controller do
               let(:bill_address_params) { build(:address, city: "Chicago").attributes.merge(id: default_bill_address.id).except(:user_id, :created_at, :updated_at) }
 
               it "updates current address" do
-                expect(default_bill_address.city).to eq "Herndon"
+                expect(default_bill_address.city).to eq "Leeds"
 
                 update
 
@@ -662,10 +662,10 @@ describe Aypex::Checkout::OrdersController, type: :controller do
       end
     end
 
-    context "Aypex::Core::GatewayError" do
+    context "Aypex::GatewayError" do
       before do
         allow(order).to receive_messages user: user
-        allow(order).to receive(:update).and_raise(Aypex::Core::GatewayError.new("Invalid something or other."))
+        allow(order).to receive(:update).and_raise(Aypex::GatewayError.new("Invalid something or other."))
         post :update, params: {state: "address"}
       end
 
@@ -741,7 +741,7 @@ describe Aypex::Checkout::OrdersController, type: :controller do
       end
 
       it "when GatewayError is raised" do
-        allow_any_instance_of(Aypex::Payment).to receive(:process!).and_raise(Aypex::Core::GatewayError.new(Aypex.t(:payment_processing_failed)))
+        allow_any_instance_of(Aypex::Payment).to receive(:process!).and_raise(Aypex::GatewayError.new(Aypex.t(:payment_processing_failed)))
         put :update, params: {state: order.state, order: {}}
         expect(flash[:error]).to eq(Aypex.t(:payment_processing_failed))
       end
@@ -757,7 +757,7 @@ describe Aypex::Checkout::OrdersController, type: :controller do
     before do
       allow(order).to receive_messages(insufficient_stock_lines: [line_item], state: "payment")
 
-      configure_aypex_preferences do |config|
+      Aypex.configure do |config|
         config.track_inventory_levels = true
       end
     end

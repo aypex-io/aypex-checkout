@@ -71,7 +71,7 @@ If you wish to have Aypex Checkout redirect your customer to a different exit po
 ```ruby
 # config/initializers/aypex.rb
 
-AypexCheckout.configure do |config|
+Aypex::Checkout.configure do |config|
   config.cart_route_name = :your_custom_cart_path_name
   config.orders_route_name = :your_custom_order_path_name
 end

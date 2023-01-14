@@ -3,14 +3,14 @@ module Aypex
     module PathsHelper
       # Provides a localized path to redirect after order completion
       def aypex_checkout_completion_route(order)
-        path = "#{AypexCheckout.config.orders_route_name}/#{order.number}"
+        path = "#{Aypex::Checkout::Config.orders_route_name}/#{order.number}"
 
         path_localizer(path)
       end
 
       # Provides a localized path to cart
       def aypex_checkout_cart_route(params = {})
-        path = AypexCheckout.config.cart_route_name
+        path = Aypex::Checkout::Config.cart_route_name
 
         path_localizer(path)
       end

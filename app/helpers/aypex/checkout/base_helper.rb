@@ -1,6 +1,9 @@
 module Aypex
   module Checkout
     module BaseHelper
+      include PathsHelper
+      include ProductsHelper
+
       def aypex_checkout_toaste_class(kind: :notice)
         if kind == :error
           "text-bg-danger"
