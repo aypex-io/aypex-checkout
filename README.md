@@ -59,8 +59,8 @@ This can be changed so the customer is sent to the Address page as the first ste
 ```ruby
 # config/initializers/aypex.rb
 
-Rails.application.config.after_initialize do
-  Aypex::Auth::Config[:registration_step] = false
+Aypex::Auth.configure do |config|
+  config.registration_step = false
 end
 ```
 
