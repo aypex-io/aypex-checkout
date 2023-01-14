@@ -21,7 +21,7 @@ module Aypex
       before_action :setup_for_current_state
       before_action :add_store_credit_payments, :remove_store_credit_payments, only: [:update]
 
-      rescue_from Aypex::Core::GatewayError, with: :rescue_from_aypex_gateway_error
+      rescue_from Aypex::GatewayError, with: :rescue_from_aypex_gateway_error
 
       layout "aypex/layouts/aypex_checkout"
 
@@ -175,11 +175,11 @@ module Aypex
       end
 
       def add_store_credit_service
-        Aypex::Dependencies.checkout_add_store_credit_service.constantize
+        Aypex::Dependency.checkout_add_store_credit_service.constantize
       end
 
       def remove_store_credit_service
-        Aypex::Dependencies.checkout_remove_store_credit_service.constantize
+        Aypex::Dependency.checkout_remove_store_credit_service.constantize
       end
 
       def coupon_handler

@@ -1,5 +1,5 @@
 {
-  "name": "@matthewkennedy/aypex-checkout",
+  "name": "@aypex/aypex-checkout",
   "version": "0.0.1",
   "description": "A stand alone checkout for Aypex",
   "module": "app/javascript/aypex/checkout/index.js",
@@ -7,7 +7,7 @@
   "browser": "app/assets/javascripts/aypex_checkout.min.js",
   "gem": "app/assets/javascripts/aypex_checkout.js",
   "type": "module",
-  "repository": "https://github.com/MatthewKennedy/aypex_checkout",
+  "repository": "https://github.com/MatthewKennedy/aypex-checkout",
   "author": "Matthew Kennedy <m.kennedy@me.com>",
   "license": "MIT",
   "files": [

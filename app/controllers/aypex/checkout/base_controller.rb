@@ -1,13 +1,13 @@
 module Aypex
   module Checkout
     class BaseController < ApplicationController
-      include Aypex::Core::ControllerHelpers::Auth
-      include Aypex::Core::ControllerHelpers::Search
-      include Aypex::Core::ControllerHelpers::Store
-      include Aypex::Core::ControllerHelpers::StrongParameters
-      include Aypex::Core::ControllerHelpers::Locale
-      include Aypex::Core::ControllerHelpers::Currency
-      include Aypex::Core::ControllerHelpers::Order
+      include Aypex::ControllerHelpers::Auth
+      include Aypex::ControllerHelpers::Search
+      include Aypex::ControllerHelpers::Store
+      include Aypex::ControllerHelpers::StrongParameters
+      include Aypex::ControllerHelpers::Locale
+      include Aypex::ControllerHelpers::Currency
+      include Aypex::ControllerHelpers::Order
       include Aypex::Checkout::LocaleUrls
 
       respond_to :html

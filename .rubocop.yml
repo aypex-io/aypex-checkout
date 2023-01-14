@@ -1,15 +1,12 @@
-inherit_mode:
-  merge:
-    - Exclude
-
 require:
-  - rubocop-performance
+  - rubocop-rspec
   - standard
 
 inherit_gem:
   standard: config/base.yml
 
 AllCops:
+  TargetRubyVersion: 3.2
   NewCops: enable
   Exclude:
     - '**/sandbox/**/*'
