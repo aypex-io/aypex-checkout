@@ -1,5 +1,5 @@
 ---
-name: CI
+name: Aypex::Checkout CI
 on:
   pull_request:
     branches:

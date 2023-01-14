@@ -1,7 +1,7 @@
-[![CI](https://github.com/MatthewKennedy/aypex_checkout/actions/workflows/ci.yml/badge.svg)](https://github.com/MatthewKennedy/aypex_checkout/actions/workflows/ci.yml)
-[![Standard RB](https://github.com/MatthewKennedy/aypex_checkout/actions/workflows/standardrb.yml/badge.svg)](https://github.com/MatthewKennedy/aypex_checkout/actions/workflows/standardrb.yml)
-[![Standard JS](https://github.com/MatthewKennedy/aypex_checkout/actions/workflows/standardjs.yml/badge.svg)](https://github.com/MatthewKennedy/aypex_checkout/actions/workflows/standardjs.yml)
-[![StyleLint](https://github.com/MatthewKennedy/aypex_checkout/actions/workflows/stylelint.yml/badge.svg)](https://github.com/MatthewKennedy/aypex_checkout/actions/workflows/stylelint.yml)
+[![Aypex::Checkout CI](https://github.com/aypex-io/aypex-checkout/actions/workflows/ci.yml/badge.svg)](https://github.com/aypex-io/aypex-checkout/actions/workflows/ci.yml)
+[![Standard RB](https://github.com/aypex-io/aypex-checkout/actions/workflows/standardrb.yml/badge.svg)](https://github.com/aypex-io/aypex-checkout/actions/workflows/standardrb.yml)
+[![Standard JS](https://github.com/aypex-io/aypex-checkout/actions/workflows/standardjs.yml/badge.svg)](https://github.com/aypex-io/aypex-checkout/actions/workflows/standardjs.yml)
+[![StyleLint](https://github.com/aypex-io/aypex-checkout/actions/workflows/stylelint.yml/badge.svg)](https://github.com/aypex-io/aypex-checkout/actions/workflows/stylelint.yml)
 
 # Aypex Checkout
 
@@ -19,12 +19,9 @@ Additionally, Aypex Checkout is both Propshaft and Sprockets ready.
 
 Add
 ```ruby
-# TEMP TESTING AYPEX FRONTEND - RECOMMENDED AT THIS STAGE
-gem 'aypex_frontend', github: 'aypex/aypex_legacy_frontend', branch: 'feature/use-aypex-checkout'
-gem 'aypex_checkout', github: 'MatthewKennedy/aypex_checkout'
-
-# AUTH DEVISE COMPATIBLE VERSION
-gem 'aypex_auth_devise', github: 'aypex/aypex_auth_devise', branch: 'feature/prep-for-stand-alone-checkout'
+gem 'aypex-storefront', github: 'aypex-io/aypex-storefront'
+gem 'aypex-checkout', github: 'aypex-io/aypex-checkout'
+gem 'aypex-auth_devise', github: 'aypex-io/aypex-auth_devise'
 ```
 to your `Gemfile`.
 
