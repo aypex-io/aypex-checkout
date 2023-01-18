@@ -25,6 +25,8 @@ module Aypex
 
       layout "aypex/layouts/aypex_checkout"
 
+      helper "aypex/checkout/addresses"
+
       def edit
       end
 

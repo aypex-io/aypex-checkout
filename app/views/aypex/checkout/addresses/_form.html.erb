@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <% if Aypex::Config[:company] %>
+  <% if current_store.address_show_company_address_field %>
     <div class="form-floating mb-3">
       <%= form.text_field :company, placeholder: I18n.t('aypex_checkout.company') %>
       <%= form.label :company, I18n.t('aypex_checkout.company') %>
@@ -57,10 +57,10 @@
   </div>
 
   <div class="form-floating <% if current_store.checkout_alternative_shipping_phone %>mb-3<% end %>">
-    <%= form.phone_field :phone, required: Aypex::Config[:address_requires_phone], placeholder: I18n.t('aypex_checkout.phone') %>
+    <%= form.phone_field :phone, required: false, placeholder: I18n.t('aypex_checkout.phone') %>
 
     <%= form.label :phone do %>
-      <%= I18n.t('aypex_checkout.phone') %> <% if Aypex::Config[:address_requires_phone] %><abbr class=required title=required>*</abbr><% end %>
+      <%= I18n.t('aypex_checkout.phone') %> <% if current_store.checkout_address_requires_phone %><abbr class=required title=required>*</abbr><% end %>
     <% end %>
   </div>
 

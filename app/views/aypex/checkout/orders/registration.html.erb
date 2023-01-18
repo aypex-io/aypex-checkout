@@ -4,7 +4,7 @@
   </div>
 
   <div class="col-12">
-    <% if Aypex::Config[:allow_guest_checkout] %>
+    <% if current_store.checkout_allow_guest_checkout %>
 
       <div class=my-3>
         <div class=notation-bar><h5>or</h5></div>

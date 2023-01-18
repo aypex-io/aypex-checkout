@@ -45,7 +45,7 @@ shared_context "checkout address book" do
   def fill_in_address(address, type = :bill)
     fill_in "First Name *", with: address.firstname
     fill_in "Last Name *", with: address.lastname
-    fill_in "Company", with: address.company if Aypex::Config[:company]
+    fill_in "Company", with: address.company if @store.address_show_company_address_field
     fill_in "#{I18n.t("activerecord.attributes.aypex/address.address1")} #{Aypex.t(:required)}", with: address.address1
     fill_in I18n.t("activerecord.attributes.aypex/address.address2"), with: address.address2
     select address.state.name, from: "order_#{type}_address_attributes_state_id"

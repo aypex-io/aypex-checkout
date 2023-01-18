@@ -9,7 +9,7 @@ module Aypex
       end
 
       def self.activate
-        Dir.glob(File.join(File.dirname(__FILE__), "../../../app/**/aypex/*_decorator*.rb")).sort.each do |c|
+        Dir.glob(File.join(File.dirname(__FILE__), "../../../app/**/aypex/checkout/*_decorator*.rb")).sort.each do |c|
           Rails.application.config.cache_classes ? require(c) : load(c)
         end
       end
