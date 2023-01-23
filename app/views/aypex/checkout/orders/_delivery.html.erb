@@ -1,7 +1,7 @@
 <div id="shipping-methods" data-hook="shipping_method_inner" data-controller='form--validation'>
   <div class="shipment">
     <h5 class="mb-1">
-      <%= I18n.t('aypex_checkout.shipping_method') %>
+      <%= I18n.t('aypex.checkout.shipping_method') %>
     </h5>
 
     <%= form.fields_for :shipments do |ship_form| %>
@@ -28,8 +28,8 @@
 
   <% if current_store.checkout_shipping_instructions %>
     <div class="mt-4">
-      <h5><%= I18n.t('aypex_checkout.shipping_instructions') %></h5>
-      <%= form.text_area :special_instructions, placeholder: I18n.t('aypex_checkout.add_shipping_instructions'), cols: 40, rows: 4, class: "form-control" %>
+      <h5><%= I18n.t('aypex.checkout.shipping_instructions') %></h5>
+      <%= form.text_area :special_instructions, placeholder: I18n.t('aypex.checkout.add_shipping_instructions'), cols: 40, rows: 4, class: "form-control" %>
     </div>
   <% end %>
 </div>

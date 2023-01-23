@@ -27,7 +27,7 @@ module Aypex
       default_form_builder(Aypex::Checkout::BootstrapBuilder)
 
       def title
-        "#{current_store.name} | #{I18n.t("aypex_checkout.secure_checkout")}"
+        "#{current_store.name} | #{I18n.t("aypex.checkout.secure_checkout")}"
       end
 
       def redirect_unauthorized_access

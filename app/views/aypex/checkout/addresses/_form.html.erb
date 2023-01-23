@@ -3,7 +3,7 @@
     <%= form.collection_select :country_id, available_countries, :id, :name, { }, { data: { action: 'form--validation#validate' } } %>
 
     <%= form.label :country_id do %>
-      <%= I18n.t('aypex_checkout.country') %> <abbr class=required title=required>*</abbr>
+      <%= I18n.t('aypex.checkout.country') %> <abbr class=required title=required>*</abbr>
     <% end %>
 
     <hr class=my-4>
@@ -12,20 +12,20 @@
   <div class=row>
     <div class="col-12 col-md-6">
       <div class="form-floating mb-3">
-        <%= form.text_field :firstname, required: true, placeholder: I18n.t('aypex_checkout.first_name') %>
+        <%= form.text_field :firstname, required: true, placeholder: I18n.t('aypex.checkout.first_name') %>
 
         <%= form.label :firstname do %>
-          <%= I18n.t('aypex_checkout.first_name') %> <abbr class=required title=required>*</abbr>
+          <%= I18n.t('aypex.checkout.first_name') %> <abbr class=required title=required>*</abbr>
         <% end %>
       </div>
     </div>
 
     <div class="col-12 col-md-6">
       <div class="form-floating mb-3">
-        <%= form.text_field :lastname, required: true, placeholder: I18n.t('aypex_checkout.last_name') %>
+        <%= form.text_field :lastname, required: true, placeholder: I18n.t('aypex.checkout.last_name') %>
 
         <%= form.label :lastname do %>
-          <%= I18n.t('aypex_checkout.last_name') %> <abbr class=required title=required>*</abbr>
+          <%= I18n.t('aypex.checkout.last_name') %> <abbr class=required title=required>*</abbr>
         <% end %>
       </div>
     </div>
@@ -33,22 +33,22 @@
 
   <% if current_store.address_show_company_address_field %>
     <div class="form-floating mb-3">
-      <%= form.text_field :company, placeholder: I18n.t('aypex_checkout.company') %>
-      <%= form.label :company, I18n.t('aypex_checkout.company') %>
+      <%= form.text_field :company, placeholder: I18n.t('aypex.checkout.company') %>
+      <%= form.label :company, I18n.t('aypex.checkout.company') %>
     </div>
   <% end %>
 
   <div class="form-floating mb-3">
-    <%= form.text_field :address1, placeholder: I18n.t('aypex_checkout.street_address') %>
+    <%= form.text_field :address1, placeholder: I18n.t('aypex.checkout.street_address') %>
 
     <%= form.label :address1 do %>
-      <%= I18n.t('aypex_checkout.street_address') %> <abbr class=required title=required>*</abbr>
+      <%= I18n.t('aypex.checkout.street_address') %> <abbr class=required title=required>*</abbr>
     <% end %>
   </div>
 
   <div class="form-floating mb-3">
-    <%= form.text_field :address2, placeholder: I18n.t('aypex_checkout.street_address_2') %>
-    <%= form.label :address2, I18n.t('aypex_checkout.street_address_2') %>
+    <%= form.text_field :address2, placeholder: I18n.t('aypex.checkout.street_address_2') %>
+    <%= form.label :address2, I18n.t('aypex.checkout.street_address_2') %>
   </div>
 
 
@@ -57,17 +57,17 @@
   </div>
 
   <div class="form-floating <% if current_store.checkout_alternative_shipping_phone %>mb-3<% end %>">
-    <%= form.phone_field :phone, required: false, placeholder: I18n.t('aypex_checkout.phone') %>
+    <%= form.phone_field :phone, required: false, placeholder: I18n.t('aypex.checkout.phone') %>
 
     <%= form.label :phone do %>
-      <%= I18n.t('aypex_checkout.phone') %> <% if current_store.checkout_address_requires_phone %><abbr class=required title=required>*</abbr><% end %>
+      <%= I18n.t('aypex.checkout.phone') %> <% if current_store.checkout_address_requires_phone %><abbr class=required title=required>*</abbr><% end %>
     <% end %>
   </div>
 
   <% if current_store.checkout_alternative_shipping_phone %>
     <div class="form-floating">
-      <%= form.phone_field :alternative_phone, placeholder: I18n.t('aypex_checkout.alternative_phone') %>
-      <%= form.label :alternative_phone, I18n.t('aypex_checkout.alternative_phone') %>
+      <%= form.phone_field :alternative_phone, placeholder: I18n.t('aypex.checkout.alternative_phone') %>
+      <%= form.label :alternative_phone, I18n.t('aypex.checkout.alternative_phone') %>
     </div>
   <% end %>
 </div>

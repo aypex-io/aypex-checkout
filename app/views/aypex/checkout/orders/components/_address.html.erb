@@ -6,11 +6,11 @@
 
 <% content_for :back_button do %>
   <%= link_to aypex_checkout_cart_route, class: 'btn btn-link' do %>
-    <%= aypex_checkout_svg_tag('chevron-left.svg') %> <%= I18n.t('aypex_checkout.return_to_cart') %>
+    <%= aypex_checkout_svg_tag('chevron-left.svg') %> <%= I18n.t('aypex.checkout.return_to_cart') %>
   <% end %>
 <% end %>
 
 <% content_for :proceed_button do %>
-  <% # i18n-tasks-use I18n.t('aypex_checkout.continue_to_delivery') %>
-  <%= submit_tag I18n.t("aypex_checkout.continue_to_#{aypex_checkout_next_step_name}"), class: 'btn btn-primary w-100' %>
+  <% # i18n-tasks-use I18n.t('aypex.checkout.continue_to_delivery') %>
+  <%= submit_tag I18n.t("aypex.checkout.continue_to_#{aypex_checkout_next_step_name}"), class: 'btn btn-primary w-100' %>
 <% end %>

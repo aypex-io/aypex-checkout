@@ -4,24 +4,24 @@ module Aypex
       def aypex_checkout_state_label(country)
         case country.iso3
         when "ARE"
-          I18n.t("aypex_checkout.emirate")
+          I18n.t("aypex.checkout.emirate")
         when "AUS"
-          I18n.t("aypex_checkout.state_territory")
+          I18n.t("aypex.checkout.state_territory")
         else
-          I18n.t("aypex_checkout.state")
+          I18n.t("aypex.checkout.state")
         end
       end
 
       def aypex_checkout_zipcode_label(country)
         case country.iso3
         when "GBR"
-          I18n.t("aypex_checkout.post_code")
+          I18n.t("aypex.checkout.post_code")
         when "CAN"
-          I18n.t("aypex_checkout.post_code")
+          I18n.t("aypex.checkout.post_code")
         when "AUS"
-          I18n.t("aypex_checkout.post_code")
+          I18n.t("aypex.checkout.post_code")
         else
-          I18n.t("aypex_checkout.zipcode")
+          I18n.t("aypex.checkout.zipcode")
         end
       end
 

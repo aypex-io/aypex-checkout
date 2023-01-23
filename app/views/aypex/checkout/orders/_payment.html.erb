@@ -2,7 +2,7 @@
   <%= render partial: 'aypex/checkout/payment/storecredit' %>
 
   <h5 class="mb-1">
-    <%= I18n.t('aypex_checkout.payment_method') %>
+    <%= I18n.t('aypex.checkout.payment_method') %>
   </h5>
 
   <% if aypex_checkout_available_payment_methods.any? %>
@@ -26,7 +26,7 @@
     </ul>
   <% else %>
     <div class="alert alert-info">
-      <%= I18n.t('aypex_checkout.no_payment_method_options_provided_contact_the_store_owner') %>
+      <%= I18n.t('aypex.checkout.no_payment_method_options_provided_contact_the_store_owner') %>
     </div>
   <% end %>
 </div>

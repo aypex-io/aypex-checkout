@@ -29,13 +29,13 @@
           <div class="d-flex" id="discount-apply">
             <div class="flex-fill">
               <div class="form-floating">
-                <%= form.text_field :coupon_code, placeholder: I18n.t('aypex_checkout.discount_code'), class: 'form-control text-uppercase', data: { form__state_target: 'watch' } %>
-                <%= form.label :coupon_code, I18n.t('aypex_checkout.discount_code') %>
+                <%= form.text_field :coupon_code, placeholder: I18n.t('aypex.checkout.discount_code'), class: 'form-control text-uppercase', data: { form__state_target: 'watch' } %>
+                <%= form.label :coupon_code, I18n.t('aypex.checkout.discount_code') %>
               </div>
             </div>
 
             <div>
-              <%= button_tag I18n.t('aypex_checkout.apply'), class: 'btn btn-secondary ms-2', data: {form__state_target: 'saveButton'} %>
+              <%= button_tag I18n.t('aypex.checkout.apply'), class: 'btn btn-secondary ms-2', data: {form__state_target: 'saveButton'} %>
             </div>
           </div>
         <% end %>

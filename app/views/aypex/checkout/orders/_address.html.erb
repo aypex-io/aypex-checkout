@@ -4,11 +4,11 @@
       <div class="d-flex">
         <div class=flex-fill>
           <h5>
-            <%= I18n.t('aypex_checkout.contact_information') %>
+            <%= I18n.t('aypex.checkout.contact_information') %>
           </h5>
         </div>
         <div>
-          <span class="text-muted"><%= I18n.t('aypex_checkout.already_have_an_account') %></span> <%= link_to(I18n.t('aypex_checkout.sign_in'), aypex.checkout_users_login_path, data: { turbo_frame: :modal }) %>
+          <span class="text-muted"><%= I18n.t('aypex.checkout.already_have_an_account') %></span> <%= link_to(I18n.t('aypex.checkout.sign_in'), aypex.checkout_users_login_path, data: { turbo_frame: :modal }) %>
         </div>
       </div>
 
@@ -22,7 +22,7 @@
   <div class="row mb-4">
     <div class="col-12">
       <h5>
-        <%= I18n.t('aypex_checkout.contact_information') %>
+        <%= I18n.t('aypex.checkout.contact_information') %>
       </h5>
 
       <div class="d-flex">
@@ -31,7 +31,7 @@
           <%= try_aypex_current_user.email %>
         </div>
         <div>
-          <%= link_to I18n.t('aypex_checkout.sign_out'), aypex_logout_path %>
+          <%= link_to I18n.t('aypex.checkout.sign_out'), aypex_logout_path %>
         </div>
       </div>
 

@@ -3,93 +3,86 @@ en:
   aypex:
     checkout:
       add_new_credit_card: Add new credit card
+      add_shipping_instructions: Add shipping instructions
       additional_payment_needed: Additional payment needed
+      addresses: Addresses
+      already_have_an_account: Already have an account
+      alternative_phone: Alternative phone
       applicable_amount: Applicable amount
       apply: Apply
       authorization_failure: Authorization failure
       available_amount: Available amount
       aypex_gateway_error_flash_for_checkout: Aypex gateway error flash for checkout
+      bill_to: Bill to
       billing_address: Billing address
+      card_number: Card number
       card_type_is: Card type is
+      card_varifiction_code: Card varifiction code
+      cardholders_name: Cardholders name
       cart: Cart
+      change: Change
+      city: City
+      company: Company
       contact: Contact
+      contact_information: Contact information
       continue_as_guest: Continue as guest
+      continue_to_complete: Continue to complete
+      continue_to_confirm: Continue to confirm
+      continue_to_delivery: Continue to delivery
+      continue_to_payment: Continue to payment
+      country: Country
       delivery_information: Delivery information
+      discount: Discount
+      discount_code: Discount code
       email: Email
+      emirate: Emirate
+      expire_date_format: Expire date format
+      express_checkout: Express checkout
+      first_name: First name
       forgot_password: Forgot password
+      free: Free
       in_taxes: In taxes
       including: Including
       inventory_error_flash_for_insufficient_quantity: Inventory error flash for insufficient quantity
+      last_name: Last name
       log_in_to_continue: Log in to continue
       login: Login
       method: Method
+      no_payment_method_options_provided_contact_the_store_owner: No payment method options provided contact the store owner
       order_summary: Order summary
       other_address: Other address
       password: Password
       payment: Payment
+      payment_method: Payment method
+      phone: Phone
+      post_code: Post code
       remaining_amount: Remaining amount
       remember_me: Remember me
       remove: Remove
+      return_to_address: Return to address
+      return_to_cart: Return to cart
+      return_to_delivery: Return to delivery
+      secure_checkout: Secure checkout
+      ship_to: Ship to
       shipping: Shipping
       shipping_address: Shipping address
+      shipping_instructions: Shipping instructions
+      shipping_method: Shipping method
+      sign_in: Sign in
+      sign_in_to_continue: Sign in to continue
+      sign_out: Sign out
+      sign_up: Sign up
+      state: State
+      state_territory: State territory
+      street_address: Street address
+      street_address_2: Street address 2
+      subtotal: Subtotal
+      successfully_created: Successfully created
+      successfully_removed: Successfully removed
+      successfully_updated: Successfully updated
       summary: Summary
       the_order_has_already_been_updated: The order has already been updated.
       total: Total
       unrecognized_card_type: Unrecognized card type
       use_shipping: Use shipping
-  aypex_checkout:
-    add_shipping_instructions: Add shipping instructions...
-    addresses: Addresses
-    already_have_an_account: Already have an account?
-    alternative_phone: Alternative phone
-    apply: Apply
-    bill_to: Bill to
-    billing_address: Billing address
-    card_number: Card number
-    card_varifiction_code: Security code
-    cardholders_name: Cardholders name
-    change: change
-    city: City
-    company: Csompany
-    contact_information: Contact information
-    continue_to_complete: Complete order
-    continue_to_confirm: Confirm order
-    continue_to_delivery: Continue to shipping
-    continue_to_payment: Continue to payment
-    country: Country
-    discount: Discount
-    discount_code: Discount code
-    email: Email
-    emirate: Emirate
-    expire_date_format: Expiration date (MM/YY)
-    express_checkout: Express checkout
-    first_name: First name
-    forgot_password: Forgot password
-    free: FREE
-    last_name: Last name
-    no_payment_method_options_provided_contact_the_store_owner: No payment options are provided, pleasecontact the store owner.
-    password: Password
-    payment_method: Payment method
-    phone: Phone
-    post_code: Postcode
-    remember_me: Remember me
-    return_to_address: Return to address
-    return_to_cart: Return to cart
-    return_to_delivery: Return to shipping
-    secure_checkout: Secure Checkout
-    ship_to: Ship to
-    shipping_instructions: Ship instructions
-    shipping_method: Shipping method
-    sign_in: Sign in
-    sign_in_to_continue: Sign in to continue
-    sign_out: Sign out
-    sign_up: Sign up
-    state: State
-    state_territory: State/Territory
-    street_address: Street address
-    street_address_2: Address continued
-    subtotal: Subtotal
-    successfully_created: Successfully created
-    successfully_removed: Successfully removed
-    successfully_updated: Successfully updated
-    zipcode: Zipcode
+      zipcode: Zipcode

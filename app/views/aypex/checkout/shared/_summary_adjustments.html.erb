@@ -1,7 +1,7 @@
 <%# SUBTOTAL %>
 <div id="subtotal" class="d-flex my-1" data-hook="order_summary">
   <div class="text-left flex-fill">
-    <%= I18n.t('aypex_checkout.subtotal') %>
+    <%= I18n.t('aypex.checkout.subtotal') %>
   </div>
   <div data-hook="order_item_total" class="text-end">
     <%= order.display_item_total %>
@@ -12,7 +12,7 @@
 <% if @order.line_item_adjustments.nonzero.promotion.exists? %>
   <div class="d-flex my-1">
     <div class="flex-fill">
-      <%= I18n.t('aypex_checkout.discount') %>
+      <%= I18n.t('aypex.checkout.discount') %>
     </div>
 
     <div class="text-end">
@@ -26,7 +26,7 @@
 <% if order.shipments.any? %>
   <div class="d-flex my-1" data-hook="order_summary">
     <% if order.shipment_adjustments.promotion.exists? %>
-      <% shipping_total = I18n.t('aypex_checkout.free') %>
+      <% shipping_total = I18n.t('aypex.checkout.free') %>
     <% else %>
       <% shipping_total = Aypex::Money.new(order.shipments.to_a.sum(&:cost), currency: order.currency) %>
     <% end %>

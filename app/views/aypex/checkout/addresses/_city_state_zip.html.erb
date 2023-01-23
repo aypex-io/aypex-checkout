@@ -5,10 +5,10 @@
     <div class="row">
       <div class=<%= aypex_checkout_city_field_class(@order.send(address_type).country) %>>
         <div class="form-floating mb-3">
-          <%= f.text_field :city, required: true, placeholder: I18n.t('aypex_checkout.city') %>
+          <%= f.text_field :city, required: true, placeholder: I18n.t('aypex.checkout.city') %>
 
           <%= f.label :city do %>
-            <%= I18n.t('aypex_checkout.city') %> <abbr class=required title=required>*</abbr>
+            <%= I18n.t('aypex.checkout.city') %> <abbr class=required title=required>*</abbr>
           <% end %>
         </div>
       </div>
