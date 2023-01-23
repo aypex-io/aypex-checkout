@@ -12,7 +12,7 @@ module Aypex
     # Used to configure Aypex Checkout.
     #
     # Example:
-    #   Aypex::Checkout.config do |config|
+    #   Aypex::Checkout.configure do |config|
     #     config.cart_route_name = 'cart'
     #   end
     def self.configure
