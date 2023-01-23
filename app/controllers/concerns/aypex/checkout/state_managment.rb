@@ -48,7 +48,7 @@ module Aypex
           changes = @order.changes if @order.changed?
           @order.reload.with_lock do
             unless @order.state_lock_version == params[:order].delete(:state_lock_version).to_i
-              flash[:error] = Aypex.t(:order_already_updated)
+              flash[:error] = I18n.t("aypex.checkout.the_order_has_already_been_updated")
               redirect_to(checkout_state_path(@order.state)) && return
             end
             @order.increment!(:state_lock_version)

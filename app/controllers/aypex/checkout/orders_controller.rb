@@ -136,7 +136,7 @@ module Aypex
 
       def ensure_sufficient_stock_lines
         if @order.insufficient_stock_lines.present?
-          flash[:error] = Aypex.t(:inventory_error_flash_for_insufficient_quantity)
+          flash[:error] = I18n.t("aypex.checkout.inventory_error_flash_for_insufficient_quantity")
           redirect_to helpers.aypex_checkout_cart_route
         end
       end
@@ -163,7 +163,7 @@ module Aypex
       end
 
       def rescue_from_aypex_gateway_error(exception)
-        flash.now[:error] = Aypex.t(:aypex_gateway_error_flash_for_checkout)
+        flash.now[:error] = I18n.t("aypex.checkout.aypex_gateway_error_flash_for_checkout")
         @order.errors.add(:base, exception.message)
         render :edit, status: :unprocessable_entity
       end

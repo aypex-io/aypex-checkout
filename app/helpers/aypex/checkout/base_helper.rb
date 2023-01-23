@@ -73,7 +73,7 @@ module Aypex
       def aypex_checkout_checkout_progress_line
         states = @order.checkout_steps
         items = states.each_with_index.map do |state, i|
-          text = Aypex.t("order_state.#{state}").titleize
+          text = I18n.t("aypex.checkout.order_state.#{state}").titleize
 
           css_classes = []
           current_index = states.index(@order.state)
@@ -96,7 +96,7 @@ module Aypex
           end
         end
 
-        content_tag(:div, raw("<span class='cart-progress'><a href='#{aypex_checkout_cart_route}' class='completed'>#{Aypex.t(:cart)}</a></span>" + items.join("")),
+        content_tag(:div, raw("<span class='cart-progress'><a href='#{aypex_checkout_cart_route}' class='completed'>#{I18n.t("aypex.checkout.cart")}</a></span>" + items.join("")),
           class: "steps-container text-center step-#{@order.state}", id: "checkout-steps")
       end
 

@@ -13,7 +13,7 @@
       </div>
 
       <div class="form-floating mb-1">
-        <%= form.email_field :email, required: true, placeholder: Aypex.t(:email) %>
+        <%= form.email_field :email, required: true, placeholder: I18n.t("aypex.checkout.email") %>
         <%= form.label :email %>
       </div>
     </div>
@@ -47,7 +47,7 @@
       <div class=d-flex>
         <div class=flex-fill>
           <h5>
-            <%= Aypex.t("#{address_type}_address") %>
+            <%= I18n.t("aypex.checkout.#{address_type}_address") %>
           </h5>
         </div>
 
@@ -71,7 +71,7 @@
       <div class="d-none" data-hook="use_billing">
         <div class="form-check">
           <%= form.check_box :use_shipping, { class: 'form-check-input' }, true, @order.shipping_eq_billing_address? %>
-          <%= form.label :use_shipping, Aypex.t(:use_shipping) %>
+          <%= form.label :use_shipping, I18n.t("aypex.checkout.use_shipping") %>
         </div>
       </div>
     <% end %>

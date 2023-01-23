@@ -32,7 +32,7 @@
     <% end %>
 
     <div class="flex-fill">
-      <%= Aypex.t(:shipping) %>
+      <%= I18n.t("aypex.checkout.shipping") %>
     </div>
 
     <div class="text-end">
@@ -60,13 +60,13 @@
 <%# TOTAL %>
 <div id="order-total-line" class="d-flex">
   <div class="flex-fill">
-    <span class="fs-4"><%= Aypex.t(:total) %></span>
+    <span class="fs-4"><%= I18n.t("aypex.checkout.total") %></span>
     <% if order.all_adjustments.nonzero.tax.exists? && @order.state == 'payment' %>
       <% order.line_item_adjustments.nonzero.eligible.each do |included_tax| %>
         <% next if (included_tax.source_type == 'Aypex::PromotionAction') || (included_tax.amount == 0) || (!included_tax.included) %>
 
         <span class="total-tax" data-hook="order_details_tax_adjustments">
-          <%= Aypex.t(:including) %> <%= included_tax.display_amount  %> <%= Aypex.t(:in_taxes) %>
+          <%= I18n.t("aypex.checkout.including") %> <%= included_tax.display_amount  %> <%= I18n.t("aypex.checkout.in_taxes") %>
         </span>
       <% end %>
     <% end %>

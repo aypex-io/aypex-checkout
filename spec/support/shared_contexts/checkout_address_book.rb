@@ -27,31 +27,31 @@ shared_context "checkout address book" do
   def should_have_address_fields
     expect(page).to have_field("First Name *")
     expect(page).to have_field("Last Name *")
-    expect(page).to have_field("#{I18n.t("activerecord.attributes.aypex/address.address1")} #{Aypex.t(:required)}")
+    expect(page).to have_field("#{I18n.t("activerecord.attributes.aypex/address.address1")} #{I18n.t("aypex.checkout.required")}")
     expect(page).to have_field("City *")
     expect(page).to have_field(id: /order_(bill|ship)_address_attributes_country_id/)
-    expect(page).to have_field("#{I18n.t("activerecord.attributes.aypex/address.zipcode")} #{Aypex.t(:required)}")
-    expect(page).to have_field("#{I18n.t("activerecord.attributes.aypex/address.phone")} #{Aypex.t(:required)}")
+    expect(page).to have_field("#{I18n.t("activerecord.attributes.aypex/address.zipcode")} #{I18n.t("aypex.checkout.required")}")
+    expect(page).to have_field("#{I18n.t("activerecord.attributes.aypex/address.phone")} #{I18n.t("aypex.checkout.required")}")
   end
 
   def complete_checkout(address)
-    click_button Aypex.t(:save_and_continue)
+    click_button I18n.t("aypex.checkout.save_and_continue")
     find("label > span", text: "UPS Ground").click
-    click_button Aypex.t(:save_and_continue)
+    click_button I18n.t("aypex.checkout.save_and_continue")
     fill_in_credit_card_info(address)
-    click_button Aypex.t(:save_and_continue)
+    click_button I18n.t("aypex.checkout.save_and_continue")
   end
 
   def fill_in_address(address, type = :bill)
     fill_in "First Name *", with: address.firstname
     fill_in "Last Name *", with: address.lastname
     fill_in "Company", with: address.company if @store.address_show_company_address_field
-    fill_in "#{I18n.t("activerecord.attributes.aypex/address.address1")} #{Aypex.t(:required)}", with: address.address1
+    fill_in "#{I18n.t("activerecord.attributes.aypex/address.address1")} #{I18n.t("aypex.checkout.required")}", with: address.address1
     fill_in I18n.t("activerecord.attributes.aypex/address.address2"), with: address.address2
     select address.state.name, from: "order_#{type}_address_attributes_state_id"
     fill_in "City *", with: address.city
-    fill_in "#{I18n.t("activerecord.attributes.aypex/address.zipcode")} #{Aypex.t(:required)}", with: address.zipcode
-    fill_in "#{I18n.t("activerecord.attributes.aypex/address.phone")} #{Aypex.t(:required)}", with: address.phone
+    fill_in "#{I18n.t("activerecord.attributes.aypex/address.zipcode")} #{I18n.t("aypex.checkout.required")}", with: address.zipcode
+    fill_in "#{I18n.t("activerecord.attributes.aypex/address.phone")} #{I18n.t("aypex.checkout.required")}", with: address.phone
   end
 
   def fill_in_credit_card_info(address)

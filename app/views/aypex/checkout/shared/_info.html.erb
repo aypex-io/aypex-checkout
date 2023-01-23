@@ -1,7 +1,7 @@
 <div class="checkout-so-far px-3 mb-5 border rounded">
   <% if @order.state == 'delivery' %>
     <div class="text-muted p-2">
-      <%= Aypex.t(:contact) %>:
+      <%= I18n.t("aypex.checkout.contact") %>:
     </div>
 
     <div class="p-2">
@@ -32,7 +32,7 @@
 
   <% if @order.state == 'payment' %>
     <div class="text-muted p-2">
-      <%= Aypex.t(:contact) %>:
+      <%= I18n.t("aypex.checkout.contact") %>:
     </div>
 
     <div class="p-2">
@@ -63,7 +63,7 @@
   <span class="fw border-top"></span>
 
     <div class="text-muted p-2">
-      <%= Aypex.t(:method) %>:
+      <%= I18n.t("aypex.checkout.method") %>:
     </div>
 
     <div class="p-2">

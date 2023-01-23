@@ -147,7 +147,7 @@ describe Aypex::Checkout::OrdersController, type: :controller do
 
         shared_examples "address not created" do
           it "does not create new address" do
-            expect { update }.to change { Aypex::Address.count }.by(0)
+            expect { update }.not_to change { Aypex::Address.count }
           end
         end
 
@@ -671,7 +671,7 @@ describe Aypex::Checkout::OrdersController, type: :controller do
 
       it "renders the edit template and display exception message" do
         expect(response).to render_template :edit
-        expect(flash.now[:error]).to eq(Aypex.t(:aypex_gateway_error_flash_for_checkout))
+        expect(flash.now[:error]).to eq(I18n.t("aypex.checkout.aypex_gateway_error_flash_for_checkout"))
         expect(assigns(:order).errors[:base]).to include("Invalid something or other.")
       end
     end
@@ -689,10 +689,10 @@ describe Aypex::Checkout::OrdersController, type: :controller do
         allow(controller).to receive_messages check_authorization: true
       end
 
-      context "when the country is not a shippable country" do
+      context "when the country is not a ship-able country" do
         before do
           order.ship_address.tap do |address|
-            # A different country which is not included in the list of shippable countries
+            # A different country which is not included in the list of ship-able countries
             address.country = FactoryBot.create(:country, name: "Australia")
             address.state_name = "Victoria"
             address.save
@@ -704,7 +704,7 @@ describe Aypex::Checkout::OrdersController, type: :controller do
           order.shipments.first.shipping_rates.delete_all
 
           put :update, params: {state: order.state, order: {}}
-          expect(flash[:error]).to eq(Aypex.t(:items_cannot_be_shipped))
+          expect(flash[:error]).to eq("We are unable to calculate shipping rates for the selected items.")
           expect(response).to redirect_to(aypex.checkout_state_path("address"))
         end
       end
@@ -741,9 +741,9 @@ describe Aypex::Checkout::OrdersController, type: :controller do
       end
 
       it "when GatewayError is raised" do
-        allow_any_instance_of(Aypex::Payment).to receive(:process!).and_raise(Aypex::GatewayError.new(Aypex.t(:payment_processing_failed)))
+        allow_any_instance_of(Aypex::Payment).to receive(:process!).and_raise(Aypex::GatewayError.new(I18n.t("aypex.checkout.payment_processing_failed")))
         put :update, params: {state: order.state, order: {}}
-        expect(flash[:error]).to eq(Aypex.t(:payment_processing_failed))
+        expect(flash[:error]).to eq(I18n.t("aypex.checkout.payment_processing_failed"))
       end
     end
   end
@@ -773,7 +773,7 @@ describe Aypex::Checkout::OrdersController, type: :controller do
 
       it "sets flash message for no inventory" do
         expect(flash[:error]).to eq(
-          Aypex.t(:inventory_error_flash_for_insufficient_quantity, names: "'#{product.name}'")
+          I18n.t("aypex.checkout.inventory_error_flash_for_insufficient_quantity", names: "'#{product.name}'")
         )
       end
     end

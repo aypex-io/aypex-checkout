@@ -32,7 +32,7 @@ module Aypex
 
       def redirect_unauthorized_access
         if try_aypex_current_user
-          flash[:error] = Aypex.t(:authorization_failure)
+          flash[:error] = I18n.t("aypex.checkout.authorization_failure")
           redirect_to aypex.checkout_forbidden_path
         else
           store_location

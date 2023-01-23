@@ -12,10 +12,4 @@ search:
   exclude:
     - 'app/assets/*'
     - 'app/javascript/*'
-
-ignore_missing:
-  - 'activerecord*'
-  - 'aria*'
-  - 'date*'
-  - 'number*'
-  - 'views*'
+    - 'lib/generators'

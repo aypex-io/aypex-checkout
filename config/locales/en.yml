@@ -1,5 +1,42 @@
 ---
 en:
+  aypex:
+    checkout:
+      add_new_credit_card: Add new credit card
+      additional_payment_needed: Additional payment needed
+      applicable_amount: Applicable amount
+      apply: Apply
+      authorization_failure: Authorization failure
+      available_amount: Available amount
+      aypex_gateway_error_flash_for_checkout: Aypex gateway error flash for checkout
+      billing_address: Billing address
+      card_type_is: Card type is
+      cart: Cart
+      contact: Contact
+      continue_as_guest: Continue as guest
+      delivery_information: Delivery information
+      email: Email
+      forgot_password: Forgot password
+      in_taxes: In taxes
+      including: Including
+      inventory_error_flash_for_insufficient_quantity: Inventory error flash for insufficient quantity
+      log_in_to_continue: Log in to continue
+      login: Login
+      method: Method
+      order_summary: Order summary
+      other_address: Other address
+      password: Password
+      payment: Payment
+      remaining_amount: Remaining amount
+      remember_me: Remember me
+      remove: Remove
+      shipping: Shipping
+      shipping_address: Shipping address
+      summary: Summary
+      the_order_has_already_been_updated: The order has already been updated.
+      total: Total
+      unrecognized_card_type: Unrecognized card type
+      use_shipping: Use shipping
   aypex_checkout:
     add_shipping_instructions: Add shipping instructions...
     addresses: Addresses

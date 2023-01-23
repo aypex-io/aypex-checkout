@@ -14,12 +14,12 @@
         <div class=d-flex>
           <div class=flex-fill>
             <div class="mb-3 form-floating">
-              <%= f.email_field :email, class: 'form-control', placeholder: Aypex.t(:email), value: params.dig(:aypex_user, :email) %>
-              <%= f.label :email, Aypex.t(:email) %>
+              <%= f.email_field :email, class: 'form-control', placeholder: I18n.t("aypex.checkout.email"), value: params.dig(:aypex_user, :email) %>
+              <%= f.label :email, I18n.t("aypex.checkout.email") %>
             </div>
           </div>
           <div class=ms-3>
-            <%= f.submit Aypex.t(:continue_as_guest), class: 'btn btn-block btn-outline-primary aypex-btn' %>
+            <%= f.submit I18n.t("aypex.checkout.continue_as_guest"), class: 'btn btn-block btn-outline-primary aypex-btn' %>
           </div>
         </div>
       <% end %>

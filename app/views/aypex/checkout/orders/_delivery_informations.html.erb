@@ -1,19 +1,19 @@
 <div class="checkout-confirm-delivery-informations text-start mt-3 <%= class_name %>">
   <div class="d-lg-none checkout-confirm-delivery-informations-header">
-    <%= Aypex.t(:delivery_information) %>
+    <%= I18n.t("aypex.checkout.delivery_information") %>
   </div>
   <dl>
     <% if order.has_step?("address") %>
       <div data-hook="order-ship-address">
         <dt class="text-uppercase">
-          <%= Aypex.t(:shipping_address) %>
+          <%= I18n.t("aypex.checkout.shipping_address") %>
           <%= checkout_edit_link %>
         </dt>
         <%= render 'aypex/shared/address', address: order.ship_address %>
       </div>
       <div data-hook="order-bill-address">
         <dt class="text-uppercase">
-          <%= Aypex.t(:billing_address) %>
+          <%= I18n.t("aypex.checkout.billing_address") %>
           <%= checkout_edit_link %>
         </dt>
         <%= render 'aypex/shared/address', address: order.bill_address %>
@@ -22,7 +22,7 @@
     <% if order.has_step?("delivery") %>
       <div data-hook="order-shipment">
         <dt class="text-uppercase">
-          <%= Aypex.t(:shipping) %>
+          <%= I18n.t("aypex.checkout.shipping") %>
           <%= checkout_edit_link('delivery') %>
         </dt>
         <% @order.shipments.valid.each do |shipment| %>
@@ -34,7 +34,7 @@
     <% if order.has_step?("payment") %>
       <div data-hook="order-payment">
         <dt class="text-uppercase">
-          <%= Aypex.t(:payment) %>
+          <%= I18n.t("aypex.checkout.payment") %>
           <%= checkout_edit_link('payment') %>
         </dt>
         <dd>
@@ -42,7 +42,7 @@
         </dd>
         <dd>
           <% if @order.using_store_credit? %>
-            <%= button_tag Aypex.t('store_credit.remove'), name: 'remove_store_credit', class: 'continue btn' %>
+            <%= button_tag I18n.t("aypex.checkout.remove"), name: 'remove_store_credit', class: 'continue btn' %>
           <% end %>
         </dd>
       </div>
