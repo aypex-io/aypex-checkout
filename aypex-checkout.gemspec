@@ -11,12 +11,11 @@ Gem::Specification.new do |spec|
   spec.homepage = "https://github.com/aypex-io/aypex-checkout"
   spec.license = "BSD-3-Clause"
 
-  spec.metadata = {
-    "bug_tracker_uri" => "https://github.com/aypex-io/aypex-checkout/issues",
-    "changelog_uri" => "https://github.com/aypex-io/aypex-checkout/releases/tag/v#{spec.version}",
-    "documentation_uri" => "https://github.com/aypex-io/aypex-checkout",
-    "source_code_uri" => "https://github.com/aypex-io/aypex-checkout/tree/v#{spec.version}"
-  }
+  spec.metadata["homepage_uri"] = spec.homepage
+  spec.metadata["source_code_uri"] = "https://github.com/aypex-io/aypex-checkout/tree/v#{spec.version}"
+  spec.metadata["changelog_uri"] = "https://github.com/aypex-io/aypex-checkout/releases/tag/v#{spec.version}"
+  spec.metadata["bug_tracker_uri"] = "https://github.com/aypex-io/aypex-checkout/issues"
+  spec.metadata["documentation_uri"] = "https://aypex.io/docs"
 
   spec.required_ruby_version = ">= 3.2"
 

@@ -32,21 +32,6 @@ bundle install
 bin/rails g aypex:checkout:install
 ```
 
-### Using Propshaft
-
-You're good to go.
-
-### Using Sprockets
-
-Add for following to your app/assets/config/manifest.js
-```js
-//= link aypex/checkout/aypex_checkout.min.css
-//= link aypex_checkout.min.js
-//= link aypex/checkout/aypex-logo.svg
-```
-then restart your server.
-
-
 ## Checkout Flow
 
 For the most part, the checkout flow is unchanged, your customer enters the checkout at `/checkout`
