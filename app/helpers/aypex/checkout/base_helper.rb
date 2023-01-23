@@ -54,7 +54,7 @@ module Aypex
         elsif logo_attachment&.attached? && logo_attachment&.image?
           main_app.cdn_image_url(current_store.logo)
         else
-          asset_path("aypex/checkout/aypex-logo.svg")
+          asset_path("aypex/checkout/logo.svg")
         end
 
         path = aypex.respond_to?(:checkout_root_path) ? aypex.checkout_root_path : main_app.checkout_root_path
@@ -73,7 +73,14 @@ module Aypex
       def aypex_checkout_checkout_progress_line
         states = @order.checkout_steps
         items = states.each_with_index.map do |state, i|
-          text = I18n.t("aypex.checkout.order_state.#{state}").titleize
+          # i18n-tasks-use I18n.t("aypex.checkout.address")
+          # i18n-tasks-use I18n.t("aypex.checkout.cart")
+          # i18n-tasks-use I18n.t("aypex.checkout.complete")
+          # i18n-tasks-use I18n.t("aypex.checkout.confirm")
+          # i18n-tasks-use I18n.t("aypex.checkout.delivery")
+          # i18n-tasks-use I18n.t("aypex.checkout.payment")
+          # i18n-tasks-use I18n.t("aypex.checkout.summary")
+          text = I18n.t("aypex.checkout.#{state}").titleize
 
           css_classes = []
           current_index = states.index(@order.state)

@@ -1,11 +1,7 @@
 <div data-hook='<%= "#{address_kind}_inner" %>'>
   <div class="form-floating mb-3">
     <%= form.collection_select :country_id, available_countries, :id, :name, { }, { data: { action: 'form--validation#validate' } } %>
-
-    <%= form.label :country_id do %>
-      <%= I18n.t('aypex.checkout.country') %> <abbr class=required title=required>*</abbr>
-    <% end %>
-
+    <%= form.label :country_id, field_required_text(I18n.t('aypex.checkout.country')) %>
     <hr class=my-4>
   </div>
 
@@ -13,20 +9,14 @@
     <div class="col-12 col-md-6">
       <div class="form-floating mb-3">
         <%= form.text_field :firstname, required: true, placeholder: I18n.t('aypex.checkout.first_name') %>
-
-        <%= form.label :firstname do %>
-          <%= I18n.t('aypex.checkout.first_name') %> <abbr class=required title=required>*</abbr>
-        <% end %>
+        <%= form.label :firstname, field_required_text(I18n.t('aypex.checkout.first_name')) %>
       </div>
     </div>
 
     <div class="col-12 col-md-6">
       <div class="form-floating mb-3">
         <%= form.text_field :lastname, required: true, placeholder: I18n.t('aypex.checkout.last_name') %>
-
-        <%= form.label :lastname do %>
-          <%= I18n.t('aypex.checkout.last_name') %> <abbr class=required title=required>*</abbr>
-        <% end %>
+        <%= form.label :lastname, field_required_text(I18n.t('aypex.checkout.last_name')) %>
       </div>
     </div>
   </div>
@@ -40,10 +30,7 @@
 
   <div class="form-floating mb-3">
     <%= form.text_field :address1, placeholder: I18n.t('aypex.checkout.street_address') %>
-
-    <%= form.label :address1 do %>
-      <%= I18n.t('aypex.checkout.street_address') %> <abbr class=required title=required>*</abbr>
-    <% end %>
+    <%= form.label :address1, field_required_text(I18n.t('aypex.checkout.street_address')) %>
   </div>
 
   <div class="form-floating mb-3">
@@ -57,11 +44,8 @@
   </div>
 
   <div class="form-floating <% if current_store.checkout_alternative_shipping_phone %>mb-3<% end %>">
-    <%= form.phone_field :phone, required: false, placeholder: I18n.t('aypex.checkout.phone') %>
-
-    <%= form.label :phone do %>
-      <%= I18n.t('aypex.checkout.phone') %> <% if current_store.checkout_address_requires_phone %><abbr class=required title=required>*</abbr><% end %>
-    <% end %>
+    <%= form.phone_field :phone, required: current_store.checkout_address_requires_phone, placeholder: I18n.t('aypex.checkout.phone') %>
+    <%= form.label :phone, field_required_text(I18n.t('aypex.checkout.phone'), required: current_store.checkout_address_requires_phone) %>
   </div>
 
   <% if current_store.checkout_alternative_shipping_phone %>

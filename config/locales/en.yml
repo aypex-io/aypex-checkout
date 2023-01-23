@@ -5,6 +5,7 @@ en:
       add_new_credit_card: Add new credit card
       add_shipping_instructions: Add shipping instructions
       additional_payment_needed: Additional payment needed
+      address: Address
       addresses: Addresses
       already_have_an_account: Already have an account
       alternative_phone: Alternative phone
@@ -23,6 +24,8 @@ en:
       change: Change
       city: City
       company: Company
+      complete: Complete
+      confirm: Confirm
       contact: Contact
       contact_information: Contact information
       continue_as_guest: Continue as guest
@@ -31,6 +34,7 @@ en:
       continue_to_delivery: Continue to delivery
       continue_to_payment: Continue to payment
       country: Country
+      delivery: Delivery
       delivery_information: Delivery information
       discount: Discount
       discount_code: Discount code

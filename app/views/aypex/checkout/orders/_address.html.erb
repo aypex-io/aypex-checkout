@@ -14,7 +14,7 @@
 
       <div class="form-floating mb-1">
         <%= form.email_field :email, required: true, placeholder: I18n.t("aypex.checkout.email") %>
-        <%= form.label :email %>
+        <%= form.label :email, field_required_text(I18n.t('aypex.checkout.email')) %>
       </div>
     </div>
   </div>

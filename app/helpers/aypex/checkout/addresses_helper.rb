@@ -25,11 +25,11 @@ module Aypex
         end
       end
 
-      def aypex_checkout_required_span_tag(required = true)
+      def field_required_text(text, required: true)
         if required
-          content_tag(:span, " *", class: "required text-danger")
+          raw(text) + content_tag(:span, " *", class: "required text-danger")
         else
-          ""
+          text
         end
       end
 
