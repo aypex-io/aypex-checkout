@@ -5498,7 +5498,7 @@ var Popper = Object.freeze({
 });
 
 /*!
-  * Bootstrap v5.2.3 (https://getbootstrap.com/)
+  * Bootstrap v5.3.0-alpha1 (https://getbootstrap.com/)
   * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */ const MAX_UID = 1e6;
@@ -5506,6 +5506,13 @@ var Popper = Object.freeze({
 const MILLISECONDS_MULTIPLIER = 1e3;
 
 const TRANSITION_END = "transitionend";
+
+const parseSelector = selector => {
+  if (selector && window.CSS && window.CSS.escape) {
+    selector = selector.replace(/#([^\s"#']+)/g, ((match, id) => `#${CSS.escape(id)}`));
+  }
+  return selector;
+};
 
 const toType = object => {
   if (object === null || object === undefined) {
@@ -5519,34 +5526,6 @@ const getUID = prefix => {
     prefix += Math.floor(Math.random() * MAX_UID);
   } while (document.getElementById(prefix));
   return prefix;
-};
-
-const getSelector = element => {
-  let selector = element.getAttribute("data-bs-target");
-  if (!selector || selector === "#") {
-    let hrefAttribute = element.getAttribute("href");
-    if (!hrefAttribute || !hrefAttribute.includes("#") && !hrefAttribute.startsWith(".")) {
-      return null;
-    }
-    if (hrefAttribute.includes("#") && !hrefAttribute.startsWith("#")) {
-      hrefAttribute = `#${hrefAttribute.split("#")[1]}`;
-    }
-    selector = hrefAttribute && hrefAttribute !== "#" ? hrefAttribute.trim() : null;
-  }
-  return selector;
-};
-
-const getSelectorFromElement = element => {
-  const selector = getSelector(element);
-  if (selector) {
-    return document.querySelector(selector) ? selector : null;
-  }
-  return null;
-};
-
-const getElementFromSelector = element => {
-  const selector = getSelector(element);
-  return selector ? document.querySelector(selector) : null;
 };
 
 const getTransitionDurationFromElement = element => {
@@ -5583,7 +5562,7 @@ const getElement = object => {
     return object.jquery ? object[0] : object;
   }
   if (typeof object === "string" && object.length > 0) {
-    return document.querySelector(object);
+    return document.querySelector(parseSelector(object));
   }
   return null;
 };
@@ -5687,11 +5666,7 @@ const defineJQueryPlugin = plugin => {
   }));
 };
 
-const execute = callback => {
-  if (typeof callback === "function") {
-    callback();
-  }
-};
+const execute = (possibleCallback, args = [], defaultValue = possibleCallback) => typeof possibleCallback === "function" ? possibleCallback(...args) : defaultValue;
 
 const executeAfterTransition = (callback, transitionElement, waitForTransition = true) => {
   if (!waitForTransition) {
@@ -5845,9 +5820,8 @@ function removeHandler(element, events, typeEvent, handler, delegationSelector) 
 
 function removeNamespacedHandlers(element, events, typeEvent, namespace) {
   const storeElementEvent = events[typeEvent] || {};
-  for (const handlerKey of Object.keys(storeElementEvent)) {
+  for (const [handlerKey, event] of Object.entries(storeElementEvent)) {
     if (handlerKey.includes(namespace)) {
-      const event = storeElementEvent[handlerKey];
       removeHandler(element, events, typeEvent, event.callable, event.delegationSelector);
     }
   }
@@ -5886,10 +5860,9 @@ const EventHandler = {
         removeNamespacedHandlers(element, events, elementEvent, originalTypeEvent.slice(1));
       }
     }
-    for (const keyHandlers of Object.keys(storeElementEvent)) {
+    for (const [keyHandlers, event] of Object.entries(storeElementEvent)) {
       const handlerKey = keyHandlers.replace(stripUidRegex, "");
       if (!inNamespace || originalTypeEvent.includes(handlerKey)) {
-        const event = storeElementEvent[keyHandlers];
         removeHandler(element, events, typeEvent, event.callable, event.delegationSelector);
       }
     }
@@ -5930,8 +5903,8 @@ const EventHandler = {
   }
 };
 
-function hydrateObj(obj, meta) {
-  for (const [key, value] of Object.entries(meta || {})) {
+function hydrateObj(obj, meta = {}) {
+  for (const [key, value] of Object.entries(meta)) {
     try {
       obj[key] = value;
     } catch (_unused) {
@@ -6059,8 +6032,7 @@ class Config {
     };
   }
   _typeCheckConfig(config, configTypes = this.constructor.DefaultType) {
-    for (const property of Object.keys(configTypes)) {
-      const expectedTypes = configTypes[property];
+    for (const [property, expectedTypes] of Object.entries(configTypes)) {
       const value = config[property];
       const valueType = isElement(value) ? "element" : toType(value);
       if (!new RegExp(expectedTypes).test(valueType)) {
@@ -6070,7 +6042,7 @@ class Config {
   }
 }
 
-const VERSION = "5.2.3";
+const VERSION = "5.3.0-alpha1";
 
 class BaseComponent extends Config {
   constructor(element, config) {
@@ -6119,6 +6091,81 @@ class BaseComponent extends Config {
   }
 }
 
+const getSelector = element => {
+  let selector = element.getAttribute("data-bs-target");
+  if (!selector || selector === "#") {
+    let hrefAttribute = element.getAttribute("href");
+    if (!hrefAttribute || !hrefAttribute.includes("#") && !hrefAttribute.startsWith(".")) {
+      return null;
+    }
+    if (hrefAttribute.includes("#") && !hrefAttribute.startsWith("#")) {
+      hrefAttribute = `#${hrefAttribute.split("#")[1]}`;
+    }
+    selector = hrefAttribute && hrefAttribute !== "#" ? hrefAttribute.trim() : null;
+  }
+  return parseSelector(selector);
+};
+
+const SelectorEngine = {
+  find(selector, element = document.documentElement) {
+    return [].concat(...Element.prototype.querySelectorAll.call(element, selector));
+  },
+  findOne(selector, element = document.documentElement) {
+    return Element.prototype.querySelector.call(element, selector);
+  },
+  children(element, selector) {
+    return [].concat(...element.children).filter((child => child.matches(selector)));
+  },
+  parents(element, selector) {
+    const parents = [];
+    let ancestor = element.parentNode.closest(selector);
+    while (ancestor) {
+      parents.push(ancestor);
+      ancestor = ancestor.parentNode.closest(selector);
+    }
+    return parents;
+  },
+  prev(element, selector) {
+    let previous = element.previousElementSibling;
+    while (previous) {
+      if (previous.matches(selector)) {
+        return [ previous ];
+      }
+      previous = previous.previousElementSibling;
+    }
+    return [];
+  },
+  next(element, selector) {
+    let next = element.nextElementSibling;
+    while (next) {
+      if (next.matches(selector)) {
+        return [ next ];
+      }
+      next = next.nextElementSibling;
+    }
+    return [];
+  },
+  focusableChildren(element) {
+    const focusables = [ "a", "button", "input", "textarea", "select", "details", "[tabindex]", '[contenteditable="true"]' ].map((selector => `${selector}:not([tabindex^="-"])`)).join(",");
+    return this.find(focusables, element).filter((el => !isDisabled(el) && isVisible(el)));
+  },
+  getSelectorFromElement(element) {
+    const selector = getSelector(element);
+    if (selector) {
+      return SelectorEngine.findOne(selector) ? selector : null;
+    }
+    return null;
+  },
+  getElementFromSelector(element) {
+    const selector = getSelector(element);
+    return selector ? SelectorEngine.findOne(selector) : null;
+  },
+  getMultipleElementsFromSelector(element) {
+    const selector = getSelector(element);
+    return selector ? SelectorEngine.find(selector) : [];
+  }
+};
+
 const enableDismissTrigger = (component, method = "hide") => {
   const clickEvent = `click.dismiss${component.EVENT_KEY}`;
   const name = component.NAME;
@@ -6129,7 +6176,7 @@ const enableDismissTrigger = (component, method = "hide") => {
     if (isDisabled(this)) {
       return;
     }
-    const target = getElementFromSelector(this) || this.closest(`.${name}`);
+    const target = SelectorEngine.getElementFromSelector(this) || this.closest(`.${name}`);
     const instance = component.getOrCreateInstance(target);
     instance[method]();
   }));
@@ -6224,51 +6271,6 @@ EventHandler.on(document, EVENT_CLICK_DATA_API$6, SELECTOR_DATA_TOGGLE$5, (event
 }));
 
 defineJQueryPlugin(Button);
-
-const SelectorEngine = {
-  find(selector, element = document.documentElement) {
-    return [].concat(...Element.prototype.querySelectorAll.call(element, selector));
-  },
-  findOne(selector, element = document.documentElement) {
-    return Element.prototype.querySelector.call(element, selector);
-  },
-  children(element, selector) {
-    return [].concat(...element.children).filter((child => child.matches(selector)));
-  },
-  parents(element, selector) {
-    const parents = [];
-    let ancestor = element.parentNode.closest(selector);
-    while (ancestor) {
-      parents.push(ancestor);
-      ancestor = ancestor.parentNode.closest(selector);
-    }
-    return parents;
-  },
-  prev(element, selector) {
-    let previous = element.previousElementSibling;
-    while (previous) {
-      if (previous.matches(selector)) {
-        return [ previous ];
-      }
-      previous = previous.previousElementSibling;
-    }
-    return [];
-  },
-  next(element, selector) {
-    let next = element.nextElementSibling;
-    while (next) {
-      if (next.matches(selector)) {
-        return [ next ];
-      }
-      next = next.nextElementSibling;
-    }
-    return [];
-  },
-  focusableChildren(element) {
-    const focusables = [ "a", "button", "input", "textarea", "select", "details", "[tabindex]", '[contenteditable="true"]' ].map((selector => `${selector}:not([tabindex^="-"])`)).join(",");
-    return this.find(focusables, element).filter((el => !isDisabled(el) && isVisible(el)));
-  }
-};
 
 const NAME$d = "swipe";
 
@@ -6707,7 +6709,7 @@ class Carousel extends BaseComponent {
 }
 
 EventHandler.on(document, EVENT_CLICK_DATA_API$5, SELECTOR_DATA_SLIDE, (function(event) {
-  const target = getElementFromSelector(this);
+  const target = SelectorEngine.getElementFromSelector(this);
   if (!target || !target.classList.contains(CLASS_NAME_CAROUSEL)) {
     return;
   }
@@ -6792,7 +6794,7 @@ class Collapse extends BaseComponent {
     this._triggerArray = [];
     const toggleList = SelectorEngine.find(SELECTOR_DATA_TOGGLE$4);
     for (const elem of toggleList) {
-      const selector = getSelectorFromElement(elem);
+      const selector = SelectorEngine.getSelectorFromElement(elem);
       const filterElement = SelectorEngine.find(selector).filter((foundElement => foundElement === this._element));
       if (selector !== null && filterElement.length) {
         this._triggerArray.push(elem);
@@ -6874,7 +6876,7 @@ class Collapse extends BaseComponent {
     this._element.classList.add(CLASS_NAME_COLLAPSING);
     this._element.classList.remove(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW$7);
     for (const trigger of this._triggerArray) {
-      const element = getElementFromSelector(trigger);
+      const element = SelectorEngine.getElementFromSelector(trigger);
       if (element && !this._isShown(element)) {
         this._addAriaAndCollapsedClass([ trigger ], false);
       }
@@ -6906,7 +6908,7 @@ class Collapse extends BaseComponent {
     }
     const children = this._getFirstLevelChildren(SELECTOR_DATA_TOGGLE$4);
     for (const element of children) {
-      const selected = getElementFromSelector(element);
+      const selected = SelectorEngine.getElementFromSelector(element);
       if (selected) {
         this._addAriaAndCollapsedClass([ element ], this._isShown(selected));
       }
@@ -6946,9 +6948,7 @@ EventHandler.on(document, EVENT_CLICK_DATA_API$4, SELECTOR_DATA_TOGGLE$4, (funct
   if (event.target.tagName === "A" || event.delegateTarget && event.delegateTarget.tagName === "A") {
     event.preventDefault();
   }
-  const selector = getSelectorFromElement(this);
-  const selectorElements = SelectorEngine.find(selector);
-  for (const element of selectorElements) {
+  for (const element of SelectorEngine.getMultipleElementsFromSelector(this)) {
     Collapse.getOrCreateInstance(element, {
       toggle: false
     }).toggle();
@@ -7212,7 +7212,7 @@ class Dropdown extends BaseComponent {
     }
     return {
       ...defaultBsPopperConfig,
-      ...typeof this._config.popperConfig === "function" ? this._config.popperConfig(defaultBsPopperConfig) : this._config.popperConfig
+      ...execute(this._config.popperConfig, [ defaultBsPopperConfig ])
     };
   }
   _selectMenuItem({key: key, target: target}) {
@@ -7830,7 +7830,7 @@ class Modal extends BaseComponent {
 }
 
 EventHandler.on(document, EVENT_CLICK_DATA_API$2, SELECTOR_DATA_TOGGLE$2, (function(event) {
-  const target = getElementFromSelector(this);
+  const target = SelectorEngine.getElementFromSelector(this);
   if ([ "A", "AREA" ].includes(this.tagName)) {
     event.preventDefault();
   }
@@ -8036,7 +8036,7 @@ class Offcanvas extends BaseComponent {
 }
 
 EventHandler.on(document, EVENT_CLICK_DATA_API$1, SELECTOR_DATA_TOGGLE$1, (function(event) {
-  const target = getElementFromSelector(this);
+  const target = SelectorEngine.getElementFromSelector(this);
   if ([ "A", "AREA" ].includes(this.tagName)) {
     event.preventDefault();
   }
@@ -8257,7 +8257,7 @@ class TemplateFactory extends Config {
     return this._config.sanitize ? sanitizeHtml(arg, this._config.allowList, this._config.sanitizeFn) : arg;
   }
   _resolvePossibleFunction(arg) {
-    return typeof arg === "function" ? arg(this) : arg;
+    return execute(arg, [ this ]);
   }
   _putElementInTemplate(element, templateElement) {
     if (this._config.html) {
@@ -8551,7 +8551,7 @@ class Tooltip extends BaseComponent {
     return this.tip && this.tip.classList.contains(CLASS_NAME_SHOW$2);
   }
   _createPopper(tip) {
-    const placement = typeof this._config.placement === "function" ? this._config.placement.call(this, tip, this._element) : this._config.placement;
+    const placement = execute(this._config.placement, [ this, tip, this._element ]);
     const attachment = AttachmentMap[placement.toUpperCase()];
     return createPopper(this._element, tip, this._getPopperConfig(attachment));
   }
@@ -8566,7 +8566,7 @@ class Tooltip extends BaseComponent {
     return offset;
   }
   _resolvePossibleFunction(arg) {
-    return typeof arg === "function" ? arg.call(this._element) : arg;
+    return execute(arg, [ this._element ]);
   }
   _getPopperConfig(attachment) {
     const defaultBsPopperConfig = {
@@ -8602,7 +8602,7 @@ class Tooltip extends BaseComponent {
     };
     return {
       ...defaultBsPopperConfig,
-      ...typeof this._config.popperConfig === "function" ? this._config.popperConfig(defaultBsPopperConfig) : this._config.popperConfig
+      ...execute(this._config.popperConfig, [ defaultBsPopperConfig ])
     };
   }
   _setListeners() {
@@ -8710,9 +8710,9 @@ class Tooltip extends BaseComponent {
   }
   _getDelegateConfig() {
     const config = {};
-    for (const key in this._config) {
-      if (this.constructor.Default[key] !== this._config[key]) {
-        config[key] = this._config[key];
+    for (const [key, value] of Object.entries(this._config)) {
+      if (this.constructor.Default[key] !== value) {
+        config[key] = value;
       }
     }
     config.selector = false;
@@ -9117,7 +9117,7 @@ class Tab extends BaseComponent {
       return;
     }
     element.classList.add(CLASS_NAME_ACTIVE);
-    this._activate(getElementFromSelector(element));
+    this._activate(SelectorEngine.getElementFromSelector(element));
     const complete = () => {
       if (element.getAttribute("role") !== "tab") {
         element.classList.add(CLASS_NAME_SHOW$1);
@@ -9138,7 +9138,7 @@ class Tab extends BaseComponent {
     }
     element.classList.remove(CLASS_NAME_ACTIVE);
     element.blur();
-    this._deactivate(getElementFromSelector(element));
+    this._deactivate(SelectorEngine.getElementFromSelector(element));
     const complete = () => {
       if (element.getAttribute("role") !== "tab") {
         element.classList.remove(CLASS_NAME_SHOW$1);
@@ -9195,7 +9195,7 @@ class Tab extends BaseComponent {
     this._setInitialAttributesOnTargetPanel(child);
   }
   _setInitialAttributesOnTargetPanel(child) {
-    const target = getElementFromSelector(child);
+    const target = SelectorEngine.getElementFromSelector(child);
     if (!target) {
       return;
     }
