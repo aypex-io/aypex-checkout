@@ -16,7 +16,7 @@ module Aypex
       end
 
       def edit
-        session["aypex_user_return_to"] = request.env["HTTP_REFERER"]
+        session[:aypex_user_return_to] = request.env["HTTP_REFERER"]
       end
 
       def new
