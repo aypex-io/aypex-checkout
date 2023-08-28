@@ -14,7 +14,7 @@
     "app/javascript/aypex/checkout"
   ],
   "dependencies": {
-    "@hotwired/stimulus": "^3.2.1",
+    "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^7.2.4",
     "@matthewkennedy/stimulus-form-state": "^0.1.3",
     "@popperjs/core": "^2.11.6",
